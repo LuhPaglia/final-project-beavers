@@ -10,6 +10,8 @@ const Grade = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const grade = "grade";
+  
   const gradeTh = [
     "grade_id",
     "classwork_name",
@@ -51,7 +53,7 @@ const Grade = () => {
           <Dashboard th={gradeTh} tr={gradeTr} />
         </Row>
       </Container>
-      {show && <ModalCompo show={show} onClose={handleClose} />}
+      {show && <ModalCompo role={grade} show={show} onClose={handleClose} />}
     </>
   );
 };

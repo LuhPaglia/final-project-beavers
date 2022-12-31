@@ -10,6 +10,8 @@ const Students = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const student = "student";
+
   const studentTh = [
     "student_id",
     "email",
@@ -45,7 +47,7 @@ const Students = () => {
           <Dashboard th={studentTh} tr={studentTr} />
         </Row>
       </Container>
-      {show && <ModalCompo show={show} onClose={handleClose} />}
+      {show && <ModalCompo role={student} show={show} onClose={handleClose} />}
     </>
   );
 };

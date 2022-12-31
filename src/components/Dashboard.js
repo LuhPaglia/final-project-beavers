@@ -22,9 +22,13 @@ const Dashboard = ({ role, th, tr }) => {
         <tbody>
           {tr.map((td) => (
             <tr>
-              {td.map((element) => (
-                <td>{element}</td>
-              ))}
+              {td.map((element, index) =>
+                role == "teacher" && index == 4 && element != null ? (
+                  <td>${element}</td>
+                ) : (
+                  <td>{element}</td>
+                )
+              )}
               {role == "admin" ? (
                 ""
               ) : (

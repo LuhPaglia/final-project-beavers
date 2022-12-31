@@ -88,7 +88,7 @@ const Admin = () => {
           </Col>
         </Row>
       </Container>
-      {show && <ModalCompo show={show} onClose={handleClose} />}
+      {show && <ModalCompo role={admin} show={show} onClose={handleClose} />}
     </>
   );
 };
