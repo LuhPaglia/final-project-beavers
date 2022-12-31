@@ -29,9 +29,7 @@ const Dashboard = ({ role, th, tr }) => {
                   <td>{element}</td>
                 )
               )}
-              {role == "admin" ? (
-                ""
-              ) : (
+              {role != "admin" && role != "course" && (
                 <td>
                   <Button variant="success" onClick={handleShow}>
                     Edit
@@ -42,7 +40,7 @@ const Dashboard = ({ role, th, tr }) => {
           ))}
         </tbody>
       </Table>
-      {show && <ModalCompo show={show} onClose={handleClose} />}
+      {show && <ModalCompo role={role} show={show} onClose={handleClose} />}
     </>
   );
 };

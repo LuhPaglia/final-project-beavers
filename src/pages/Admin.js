@@ -2,26 +2,31 @@ import { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
 
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 const Admin = () => {
-  const [show, setShow] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [showCourse, setShowCourse] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleCloseAdmin = () => setShowAdmin(false);
+  const handleShowAdmin = () => setShowAdmin(true);
+
+  const handleCloseCoourse = () => setShowCourse(false);
+  const handleShowCoourse = () => setShowCourse(true);
 
   const admin = "admin";
+  const course = "course";
 
   const adminTh = [
-    "admin_id",
-    "user_name",
-    "email",
-    "profile_url",
-    "birthday",
-    "address",
+    "Admin ID",
+    "Username",
+    "Email",
+    "Profile URL",
+    "Birthday",
+    "Address",
   ];
 
-  const courseTh = ["course_id", "course_name", "description"];
+  const courseTh = ["Course ID", "Course Name", "Description"];
 
   const adminTr = [
     [
@@ -44,7 +49,7 @@ const Admin = () => {
 
   const courseTr = [
     [1, "Fundamentals of Front End Web Development and HTML", null],
-    [2, "Fundamentals of CSS, Preprocessors, Frameworks", null],
+    [2, "Fundamentals of CSS, Preprocessors, Frameworks, & Version Control Systems", null],
     [3, "JavaScript for Web Developers 1", null],
     [4, "JavaScript for Web Developers 2", null],
     [5, "Introduction to Back-End Web Development: PHP", null],
@@ -61,7 +66,7 @@ const Admin = () => {
                 <h1>ADMIN</h1>
               </Col>
               <Col>
-                <Button variant="success" onClick={handleShow}>
+                <Button variant="success" onClick={handleShowAdmin}>
                   Add Admin
                 </Button>
               </Col>
@@ -77,18 +82,19 @@ const Admin = () => {
                 <h1>COURSES</h1>
               </Col>
               <Col>
-                <Button variant="success" onClick={handleShow}>
+                <Button variant="success" onClick={handleShowCoourse}>
                   Add Course
                 </Button>
               </Col>
             </Row>
             <Row>
-              <Dashboard role={admin} th={courseTh} tr={courseTr} />
+              <Dashboard role={course} th={courseTh} tr={courseTr} />
             </Row>
           </Col>
         </Row>
       </Container>
-      {show && <ModalCompo role={admin} show={show} onClose={handleClose} />}
+      {showAdmin && <ModalCompo role={admin} show={showAdmin} onClose={handleCloseAdmin} />}
+      {showCourse && <ModalCompo role={course} show={showCourse} onClose={handleCloseCoourse} />}
     </>
   );
 };

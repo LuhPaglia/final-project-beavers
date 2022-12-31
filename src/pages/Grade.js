@@ -2,7 +2,7 @@ import { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
 
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 const Grade = () => {
   const [show, setShow] = useState(false);
@@ -13,15 +13,15 @@ const Grade = () => {
   const grade = "grade";
   
   const gradeTh = [
-    "grade_id",
-    "classwork_name",
-    "student_id",
-    "Grade_id",
-    "course_id",
-    "mark",
-    "date",
-    "feedback",
-    "edit",
+    "Grade ID",
+    "Classwork Name",
+    "Student ID",
+    "Teacher ID",
+    "Course ID",
+    "Mark",
+    "Date",
+    "Feedback",
+    "Edit",
   ];
 
   const gradeTr = [
@@ -50,7 +50,7 @@ const Grade = () => {
           </Col>
         </Row>
         <Row>
-          <Dashboard th={gradeTh} tr={gradeTr} />
+          <Dashboard role={grade} th={gradeTh} tr={gradeTr} />
         </Row>
       </Container>
       {show && <ModalCompo role={grade} show={show} onClose={handleClose} />}

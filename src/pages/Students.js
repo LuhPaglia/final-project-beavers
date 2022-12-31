@@ -2,7 +2,7 @@ import { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
 
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 const Students = () => {
   const [show, setShow] = useState(false);
@@ -13,15 +13,15 @@ const Students = () => {
   const student = "student";
 
   const studentTh = [
-    "student_id",
-    "email",
-    "fullname",
-    "course_id",
-    "course_name",
-    "teacher_id",
-    "address",
-    "birthday",
-    "edit",
+    "Student ID",
+    "Email",
+    "Username",
+    "Course ID",
+    "Course Name",
+    "Teacher ID",
+    "Address",
+    "Birthday",
+    "Edit",
   ];
 
   const studentTr = [
@@ -30,6 +30,7 @@ const Students = () => {
     [3, 'rmclarnon2@wufoo.com', 'Ruperta McLarnon', 3, 3, 3, '338 Comanche Park', '7/27/2022'],
     [4, 'dcrennan3@soup.io', 'Dominga Crennan', 3, 4, 4, '87549 Spaight Drive', '12/29/2021']
   ]
+
   return (
     <>
       <Container>
@@ -44,7 +45,7 @@ const Students = () => {
           </Col>
         </Row>
         <Row>
-          <Dashboard th={studentTh} tr={studentTr} />
+          <Dashboard role={student} th={studentTh} tr={studentTr} />
         </Row>
       </Container>
       {show && <ModalCompo role={student} show={show} onClose={handleClose} />}

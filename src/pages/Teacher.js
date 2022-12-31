@@ -2,7 +2,7 @@ import { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
 
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 const Teacher = () => {
   const [show, setShow] = useState(false);
@@ -13,14 +13,14 @@ const Teacher = () => {
   const teacher = "teacher";
 
   const teacherTh = [
-    "teacher_id",
-    "user_name",
-    "email",
-    "course_id",
-    "salary",
-    "address",
-    "birthday",
-    "edit",
+    "Teacher ID",
+    "Username",
+    "Email",
+    "Course ID",
+    "Salary",
+    "Address",
+    "Birthday",
+    "Edit",
   ];
 
   const teacherTr = [
