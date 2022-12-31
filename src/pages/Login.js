@@ -56,7 +56,7 @@ const Login = () => {
 
       <Form.Group as={Row} className="mb-3">
         <Col sm={{ span: 10, offset: 2 }}>
-          <Button type="submit">Log in</Button>
+          <Button variant="success" type="submit">Log in</Button>
         </Col>
       </Form.Group>
 

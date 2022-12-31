@@ -21,6 +21,13 @@ const Students = () => {
     "birthday",
     "edit",
   ];
+
+  const studentTr = [
+    [1, 'jtire0@cbsnews.com', 'Joy Tire', 3, 1, 1, '5288 Kennedy Way', '5/23/2022'],
+    [2, 'frotham1@forbes.com', 'Forrest Rotham', 3, 2, 2, '148 Sunfield Trail', '9/27/2022'],
+    [3, 'rmclarnon2@wufoo.com', 'Ruperta McLarnon', 3, 3, 3, '338 Comanche Park', '7/27/2022'],
+    [4, 'dcrennan3@soup.io', 'Dominga Crennan', 3, 4, 4, '87549 Spaight Drive', '12/29/2021']
+  ]
   return (
     <>
       <Container>
@@ -29,13 +36,13 @@ const Students = () => {
             <h1>Student Management</h1>
           </Col>
           <Col>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="success" onClick={handleShow}>
               Add
             </Button>
           </Col>
         </Row>
         <Row>
-          <Dashboard th={studentTh} />
+          <Dashboard th={studentTh} tr={studentTr} />
         </Row>
       </Container>
       {show && <ModalCompo show={show} onClose={handleClose} />}

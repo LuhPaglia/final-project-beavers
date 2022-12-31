@@ -21,6 +21,19 @@ const Grade = () => {
     "feedback",
     "edit",
   ];
+
+  const gradeTr = [
+    [
+      10001,
+      "CourseWork#3",
+      101,
+      11,
+      1001,
+      12,
+      "2022/12/19",
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur perspiciatis est quam nostrum repellat magni dignissimos inventore impedit officiis. Minus vero laudantium incidunt quisquam cumque accusantium! Quasi, quis expedita? Nobis.",
+    ],
+  ];
   return (
     <>
       <Container>
@@ -29,13 +42,13 @@ const Grade = () => {
             <h1>Grade Management</h1>
           </Col>
           <Col>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="success" onClick={handleShow}>
               Add
             </Button>
           </Col>
         </Row>
         <Row>
-          <Dashboard th={gradeTh} />
+          <Dashboard th={gradeTh} tr={gradeTr} />
         </Row>
       </Container>
       {show && <ModalCompo show={show} onClose={handleClose} />}
@@ -44,5 +57,3 @@ const Grade = () => {
 };
 
 export default Grade;
-
-

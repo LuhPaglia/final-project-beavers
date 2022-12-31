@@ -1,35 +1,45 @@
-import Table from "react-bootstrap/Table";
+import { useState } from "react";
+import ModalCompo from "../components/ModalCompo";
 
-const Dashboard = ({ th }) => {
+import { Table, Button } from "react-bootstrap";
+
+const Dashboard = ({ role, th, tr }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          {th.map((thName) => (
-            <th>{thName}</th>
+    <>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            {th.map((thName) => (
+              <th>{thName}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {tr.map((td) => (
+            <tr>
+              {td.map((element) => (
+                <td>{element}</td>
+              ))}
+              {role == "admin" ? (
+                ""
+              ) : (
+                <td>
+                  <Button variant="success" onClick={handleShow}>
+                    Edit
+                  </Button>
+                </td>
+              )}
+            </tr>
           ))}
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </Table>
+        </tbody>
+      </Table>
+      {show && <ModalCompo show={show} onClose={handleClose} />}
+    </>
   );
 };
 
