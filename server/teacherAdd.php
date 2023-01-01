@@ -7,14 +7,16 @@ $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 
-    $teacher_id = $_POST['teacher_id'];
-    $user_name = $_POST['user_name'];
-    $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
-    $email = $_POST['email'];
-    $course_id = $_POST['course_id'];
-    $salary = $_POST['salary'];
-    $address = $_POST['address'];
-    $birthday = $_POST['birthday'];
+    json_decode($_POST['form']);
+
+    $teacher_id = $_POST['form']['teacherID'];
+    $user_name = $_POST['form']['username'];
+    $password = password_hash($_POST['form']['password'],PASSWORD_DEFAULT);
+    $email = $_POST['form']['email'];
+    $course_id = $_POST['form']['courseID'];
+    $salary = $_POST['form']['salary'];
+    $address = $_POST['form']['address'];
+    $birthday = $_POST['form']['birthday'];
 
     $newTeacher = new teacherObj(null,$user_name,$password,$email,$course_id,$salary,$address, $birthday);
     $valuesArray = $newTeacher->toInsert();
@@ -25,15 +27,13 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
         if($dbSrv->insert('teacher_tb',$valuesArray,$fieldArray)){
             // print_r();
             // "added";
-            header("Location: ".$baseName."teacherMngPage.php?msg=1");
+            header("Location: http://localhost:3000/teacher");
             exit();
         }
     } else{
         echo "DB connection problem";
     }
     // "not added";
-    header("Location: ".$baseName."teacherMngPage.php?msg=2");
-    exit();
 
 }
 

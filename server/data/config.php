@@ -1,5 +1,5 @@
 <?php
-    $baseName = "http://localhost/php/php-beavers/";
+    $baseName = "http://localhost/final-project-beavers/";
     $hostName = "localhost";
     $userName = "root";
     $password = "";

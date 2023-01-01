@@ -91,7 +91,7 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
         case "teacher":
           axios
             .post(
-              "http://localhost:8888/course-05/php-beavers/teacherAdd.php",
+              "http://localhost/final-project-beavers/server/teacherAdd.php",
               form
             )
             .then((res) => {
