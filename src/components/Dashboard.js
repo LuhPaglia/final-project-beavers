@@ -6,6 +6,8 @@ import { Table, Button } from "react-bootstrap";
 const Dashboard = ({ role, th, tr }) => {
   const [show, setShow] = useState(false);
 
+  const edit = true;
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -15,7 +17,7 @@ const Dashboard = ({ role, th, tr }) => {
         <thead>
           <tr>
             {th.map((thName) => (
-              <th>{thName}</th>
+              <th key={thName}>{thName}</th>
             ))}
           </tr>
         </thead>
@@ -24,9 +26,9 @@ const Dashboard = ({ role, th, tr }) => {
             <tr>
               {td.map((element, index) =>
                 role == "teacher" && index == 4 && element != null ? (
-                  <td>${element}</td>
+                  <td key={index}>${element}</td>
                 ) : (
-                  <td>{element}</td>
+                  <td key={index}>{element}</td>
                 )
               )}
               {role != "admin" && role != "course" && (
@@ -40,7 +42,7 @@ const Dashboard = ({ role, th, tr }) => {
           ))}
         </tbody>
       </Table>
-      {show && <ModalCompo role={role} show={show} onClose={handleClose} />}
+      {show && <ModalCompo edit={edit} role={role} show={show} onClose={handleClose} />}
     </>
   );
 };
