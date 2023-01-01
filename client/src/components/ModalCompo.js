@@ -51,6 +51,8 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
     console.log(form); // new form data
   }, [form]);
 
+  console.log(edit);
+
   const handleSubmit = (e) => {
     e.preventDefault(); // Blocking default action which occurs page moving when the form is submitted.
 
