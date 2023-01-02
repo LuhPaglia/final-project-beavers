@@ -137,9 +137,8 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
       // Edit user
 
     }
-    setForm((prev) => ({
+    setForm({
       // initialization
-      ...prev,
       email: "",
       username: "",
       password: "",
@@ -156,7 +155,7 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
       mark: false,
       date: "",
       feedback: "",
-    }));
+    });
   };
 
   const course = [
