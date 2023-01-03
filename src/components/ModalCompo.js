@@ -429,7 +429,7 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
           <Button variant="secondary" onClick={onClose}>
             Close
           </Button>
-          <Button variant="success" onClick={onClose}>
+          <Button type="submit" variant="success" onClick={onClose}>
             Save Changes
           </Button>
         </Modal.Footer>
