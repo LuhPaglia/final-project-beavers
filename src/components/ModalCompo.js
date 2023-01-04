@@ -186,8 +186,8 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
             {role == "grade" && "Grade"}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+        <Modal.Body>    
             {role != "course" && role != "grade" && (
               <FloatingLabel
                 controlId="Email address"
@@ -424,16 +424,17 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
                 />
               </FloatingLabel>
             )}
-          </Form>
+          
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onClose}>
             Close
           </Button>
-          <Button type="submit" variant="success" onClick={onClose}>
+          <Button type="submit" variant="success">
             Save Changes
           </Button>
         </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );
