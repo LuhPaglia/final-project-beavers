@@ -1,15 +1,15 @@
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { StyledLogin } from '../styles';
-import { FaUser } from 'react-icons/fa';
+import { FaAdn, FaChalkboardTeacher, FaGlassCheers, FaGraduationCap, FaMagic, FaMastodon, FaSchool, FaStudiovinari, FaUser } from 'react-icons/fa';
 
 const Login = () => {
   return (
-    <StyledLogin>
+    <StyledLogin style={{paddingLeft: '15vh', paddingTop: '5vh'}}>
       <Container style={{ paddingTop: '20px', paddingBottom: '20px', width: '50%' }}>
-        <h1 style={{ fontFamily: 'Inter', fontSize: '32px', color: '#333' }}>Login page</h1>
+        <h1 style={{ fontFamily: 'Inter', fontSize: '28px', color: '#333', paddingRight:'23vh' }}>Login page</h1>
 
        
-        <Form style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '4px'}}>
+        <Form style={{paddingRight: '0', borderRadius: '4px', padding: '3vh', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
           <fieldset>
             <Form.Group as={Row} className="mb-3">
               <Form.Label as="legend" column sm={2} style={{ fontFamily: 'Sans-serif', fontSize: '18px', color: '#333' }}>
@@ -18,14 +18,14 @@ const Login = () => {
               <Col sm={3}>
                 <Form.Check
                   type="radio"
-                  label={<><FaUser style={{ marginRight: '8px' }} /> Admin</>}
+                  label={<><FaAdn style={{ marginRight: '8px'}} /> Admin </>}
                   name="role"
                   id="admin"
                   style={{ fontFamily: 'Sans-serif', fontSize: '16px', color: '#333' }}
                 />
                 <Form.Check
                   type="radio"
-                  label={<><FaUser style={{ marginRight: '8px' }} /> Teacher</>}
+                  label={<><FaChalkboardTeacher style={{ marginRight: '8px' }} /> Teacher</>}
                   name="role"
                   id="teacher"
                   style={{ fontFamily: 'Sans-serif', fontSize: '16px', color: '#333' }}
@@ -42,29 +42,28 @@ const Login = () => {
           </fieldset>
 
           <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-            <Form.Label column sm={2} style={{ fontFamily: 'Sans-serif', fontSize: '18px', color: '#333' }}>
-              Email
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control type="email" placeholder="Email" style={{ fontFamily: 'Sans-serif', fontSize: '16px', color: '#333' }} />
+            
+            <Col sm={9}>
+              
+              <Form.Control type="email" placeholder="E-mail" style={{ fontFamily: 'Sans-serif', fontSize: '16px', color: '#333' }} />
             </Col>
           </Form.Group>
 
           <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-            <Form.Label column sm={2} style={{ fontFamily: 'Sans-serif', fontSize: '18px', color: '#333' }}>
-              Password
-            </Form.Label>
-            <Col sm={10}>
+            
+            <Col sm={9}>
+              
               <Form.Control type="password" placeholder="Password" style={{ fontFamily: 'Sans-serif', fontSize: '16px', color: '#333' }} />
             </Col>
           </Form.Group>
 
           <Form.Group as={Row} className="mb-3">
-            <Col sm={{ span: 10, offset: 2 }}>
+          <Col sm={9} md={9} lg={9}>
             <Button
               variant="success"
               type="submit"
               style={{
+                width: '100%',
                 fontFamily: 'Sans-serif',
                 fontSize: '16px',
                 background: 'linear-gradient(to right, #0077c9, #00b4db)',
@@ -84,9 +83,9 @@ const Login = () => {
             </Col>
           </Form.Group>
 
-<p style={{ color: '#848484', fontFamily: 'Sans-serif', fontSize: '16px' }}>Not our member?
-<a href="./register.php" style={{ color: '#0077c9', fontFamily: 'Sans-serif', fontSize: '16px' }}>Register</a>
-</p>
+<p style={{ color: '#848484', fontFamily: 'Sans-serif', fontSize: '16px', paddingRight:'15vh'}}>Not our member?&nbsp;
+<a href="./register.php" style={{ color: '#0077c9', fontFamily: 'Sans-serif', fontSize: '16px' }}>Join now</a>
+ </p>
 </Form>
 </Container>
 </StyledLogin>
