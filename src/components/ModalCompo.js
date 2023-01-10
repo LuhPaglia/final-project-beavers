@@ -52,13 +52,15 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
   }, [form]);
 
   const handleSubmit = (e) => {
+    console.log("HERE");
     e.preventDefault(); // Blocking default action which occurs page moving when the form is submitted.
 
     // Validate username
     if (username.length < 4)
       return alert("Username must be at least 4 characters long.");
 
-    if (!edit) { // ADD user
+    if (!edit) {
+      // ADD user
       switch (role) {
         case "admin":
           axios
@@ -132,10 +134,9 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
 
         default:
           return form;
-      }     
+      }
     } else {
       // Edit user
-
     }
     setForm({
       // initialization
@@ -185,8 +186,8 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
             {role == "grade" && "Grade"}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+        <Modal.Body>    
             {role != "course" && role != "grade" && (
               <FloatingLabel
                 controlId="Email address"
@@ -423,16 +424,17 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
                 />
               </FloatingLabel>
             )}
-          </Form>
+          
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onClose}>
             Close
           </Button>
-          <Button type="submit" variant="success" onClick={onClose}>
+          <Button type="submit" variant="success">
             Save Changes
           </Button>
         </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );

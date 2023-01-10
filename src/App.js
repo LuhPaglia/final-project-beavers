@@ -4,7 +4,7 @@ import NavbarCompo from "./components/NavbarCompo";
 
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
-import Student from "./pages/Student";
+import StudentProfile from "./pages/StudentProfile";
 import Students from "./pages/Students";
 import Teacher from "./pages/Teacher";
 import Grade from "./pages/Grade";
@@ -23,7 +23,7 @@ function App() {
             <Route path="/teacher" element={<Teacher />} />
             <Route path="/students" element={<Students />} />
             <Route path="/grade" element={<Grade />} />
-            <Route path="/students/:id" element={<Student />} />
+            <Route path="/students/:id" element={<StudentProfile />} />
           </Route>
         </Routes>
       </div>
