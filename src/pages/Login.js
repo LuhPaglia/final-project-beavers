@@ -133,17 +133,6 @@ const [bgColor,setBgColor] = useState(bgEnd);
               variant="success"
               type="submit"
               onMouseEnter = {() => setBgColor(bgHover)} onMouseLeave = {() => setBgColor(bgEnd)}
-              style={bgColor}
-              // {
-              //   width: '100%',
-              //   fontFamily: 'Sans-serif',
-              //   fontSize: '16px',
-              //   background: {bgColor},
-              //   border: 'none',
-              //   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-              //   borderRadius: '4px'
-              
-            >
               Log in
             </Button>
             </Col>
