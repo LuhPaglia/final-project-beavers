@@ -7,16 +7,13 @@ $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 
-    $json = file_get_contents('php://input');
-    $form = json_decode($json,true);
-
-    $user_name = $form['username'];
-    $password = password_hash($form['password'],PASSWORD_DEFAULT);
-    $email = $form['email'];
-    $course_id = $form['courseID'];
-    $salary = $form['salary'];
-    $address = $form['address'];
-    $birthday = $form['birthday'];
+    $user_name = $_POST['username'];
+    $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    $email = $_POST['email'];
+    $course_id = $_POST['courseID'];
+    $salary = $_POST['salary'];
+    $address = $_POST['address'];
+    $birthday = $_POST['birthday'];
 
     $newTeacher = new teacherObj(null,$user_name,$password,$email,$course_id,$salary,$address,$birthday);
     $valuesArray = $newTeacher->toInsert();
@@ -25,8 +22,6 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 
     if($dbSrv->dbConnect()){
         if($dbSrv->insert('teacher_tb',$valuesArray,$fieldArray)){
-            // header("Location: http://localhost:3000/teacher");
-            // exit();
         }
     } else{
         echo "DB connection problem";

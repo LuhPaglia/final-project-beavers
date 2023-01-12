@@ -1,162 +1,81 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosSrv from "../Services/axiosSrv";
 
 import { Button, Form, FloatingLabel, Modal } from "react-bootstrap";
 
 const ModalCompo = ({ edit, role, show, onClose }) => {
-  const [form, setForm] = useState({
-    email: "",
-    username: "",
-    password: "",
-    classworkName: "",
-    studentID: false,
-    courseID: false,
-    selectedCourse: "",
-    teacherID: false,
-    salary: false,
-    address: "",
-    birthday: "",
-    courseName: "",
-    description: "",
-    mark: false,
-    date: "",
-    feedback: "",
-  });
-
-  const {
-    email,
-    username,
-    password,
-    classworkName,
-    studentID,
-    courseID,
-    selectedCourse,
-    teacherID,
-    salary,
-    address,
-    birthday,
-    courseName,
-    description,
-    mark,
-    date,
-    feedback,
-  } = form;
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  useEffect(() => {
-    console.log(form); // new form data
-  }, [form]);
-
+  
   const handleSubmit = (e) => {
     console.log("HERE");
     e.preventDefault(); // Blocking default action which occurs page moving when the form is submitted.
 
+    const formData = new FormData(e.target);
+
     // Validate username
-    if (username.length < 4)
+    if (formData.get('username').length < 4)
       return alert("Username must be at least 4 characters long.");
 
     if (!edit) {
+
       // ADD user
       switch (role) {
         case "admin":
-          axios
-            .post(
-              "http://localhost:8888/course-05/php-beavers/adminUserAdd.php",
-              form
-            )
-            .then((res) => {
-              console.log(res.data); // new admin data
-            })
-            .catch((error) => {
-              console.log(error.response);
-            });
-          break;
+          axiosSrv.post("adminUserAdd.php",formData)
+          .then(res=>{
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
+        break;
 
         case "course":
-          axios
-            .post(
-              "http://localhost:8888/course-05/php-beavers/courseAdd.php",
-              form
-            )
-            .then((res) => {
-              console.log(res.data); // new course data
-            })
-            .catch((error) => {
-              console.log(error.response);
-            });
-          break;
+          axiosSrv.post("courseAdd.php",formData)
+          .then(res=>{
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
+        break;
 
         case "teacher":
-          axios
-            .post(
-              "http://localhost:8888/course-05/php-beavers/teacherAdd.php",
-              form
-            )
-            .then((res) => {
-              console.log(res.data); // new teacher data
-            })
-            .catch((error) => {
-              console.log(error.response);
-            });
-          break;
-
+          axiosSrv.post("teacherAdd.php",formData)
+          .then(res=>{
+            console.log(res.data); // new teacher data
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
+        break;
+         
         case "student":
-          axios
-            .post(
-              "http://localhost:8888/course-05/php-beavers/studentAdd.php",
-              form
-            )
-            .then((res) => {
-              console.log(res.data); // new student data
-            })
-            .catch((error) => {
-              console.log(error.response);
-            });
-          break;
+          axiosSrv.post("studentAdd.php",formData)
+          .then(res=>{
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
+        break;
 
         case "grade":
-          axios
-            .post(
-              "http://localhost:8888/course-05/php-beavers/gradeAdd.php",
-              form
-            )
-            .then((res) => {
-              console.log(res.data); // new grade data
-            })
-            .catch((error) => {
-              console.log(error.response);
-            });
+          axiosSrv.post("gradeAdd.php",formData)
+          .then(res=>{
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
           break;
 
         default:
-          return form;
+          return null;
       }
     } else {
       // Edit user
     }
-    setForm({
-      // initialization
-      email: "",
-      username: "",
-      password: "",
-      classworkName: "",
-      studentID: false,
-      courseID: false,
-      selectedCourse: "",
-      teacherID: false,
-      salary: false,
-      address: "",
-      birthday: "",
-      courseName: "",
-      description: "",
-      mark: false,
-      date: "",
-      feedback: "",
-    });
+
   };
 
   const course = [
@@ -170,7 +89,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
     [4, "JavaScript for Web Developers 2", null],
     [5, "Introduction to Back-End Web Development: PHP", null],
     [6, "Introduction to Content Management Systems with WordPress", null],
-    [7, "courseTest", "courseTestcourseTest"],
   ];
 
   return (
@@ -196,8 +114,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               >
                 <Form.Control
                   name="email"
-                  value={email}
-                  onChange={handleChange}
                   type="email"
                   placeholder="name@example.com"
                 />
@@ -212,8 +128,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               >
                 <Form.Control
                   name="username"
-                  value={username}
-                  onChange={handleChange}
                   type="text"
                   placeholder="Username"
                 />
@@ -224,8 +138,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               <FloatingLabel controlId="Password" label="Password">
                 <Form.Control
                   name="password"
-                  value={password}
-                  onChange={handleChange}
                   type="password"
                   placeholder="Password"
                   autoComplete="on"
@@ -241,8 +153,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               >
                 <Form.Control
                   name="classworkName"
-                  value={classworkName}
-                  onChange={handleChange}
                   type="text"
                   placeholder="Classwork Name"
                 />
@@ -257,41 +167,35 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               >
                 <Form.Control
                   name="studentID"
-                  value={studentID}
-                  onChange={handleChange}
                   type="number"
                   placeholder="Student ID"
                 />
               </FloatingLabel>
             )}
 
-            {(role == "teacher" || role == "student" || role == "grade") && (
-              <FloatingLabel
-                controlId="Course ID"
-                label="Course ID"
-                className="mb-3"
-              >
-                <Form.Control
-                  name="courseID"
-                  value={courseID}
-                  onChange={handleChange}
-                  type="number"
-                  placeholder="Course ID"
-                />
-              </FloatingLabel>
+          {role == "student" && (
+            <FloatingLabel
+            controlId="profile_pic"
+            label="profile_pic"
+            className="mb-3"
+            >
+            <Form.Control
+              name="profile_pic"
+              type="file"
+              placeholder="Select profile"
+            />
+            </FloatingLabel>
             )}
 
-            {role == "student" && (
+            {(role == "teacher" || role == "student" || role == "grade") && (
               <FloatingLabel controlId="Select Course Name" label="Course Name">
                 <Form.Select
-                  name="selectedCourse"
-                  value={selectedCourse}
-                  onChange={handleChange}
+                  name="courseID"
                   aria-label="Floating label select example"
                 >
                   <option value="">Select Course Name</option>
                   {course.map((course) => (
-                    <option key={course[0]} value={course[1]}>
+                    <option key={course[0]} value={course[0]}>
                       {course[1]}
                     </option>
                   ))}
@@ -307,8 +211,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               >
                 <Form.Control
                   name="teacherID"
-                  value={teacherID}
-                  onChange={handleChange}
                   type="number"
                   placeholder="Teacher ID"
                 />
@@ -319,8 +221,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               <FloatingLabel controlId="Salary" label="Salary" className="mb-3">
                 <Form.Control
                   name="salary"
-                  value={salary}
-                  onChange={handleChange}
                   type="number"
                   placeholder="Salary"
                 />
@@ -335,8 +235,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               >
                 <Form.Control
                   name="address"
-                  value={address}
-                  onChange={handleChange}
                   type="text"
                   placeholder="Address"
                 />
@@ -351,8 +249,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               >
                 <Form.Control
                   name="birthday"
-                  value={birthday}
-                  onChange={handleChange}
                   type="date"
                   placeholder="Birthday"
                 />
@@ -367,8 +263,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               >
                 <Form.Control
                   name="courseName"
-                  value={courseName}
-                  onChange={handleChange}
                   type="text"
                   placeholder="Course Name"
                 />
@@ -380,8 +274,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
                 <Form.Control
                   as="textarea"
                   name="description"
-                  value={description}
-                  onChange={handleChange}
                   placeholder="Description"
                   style={{ height: "100px" }}
                 />
@@ -392,8 +284,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               <FloatingLabel controlId="Mark" label="Mark" className="mb-3">
                 <Form.Control
                   name="mark"
-                  value={mark}
-                  onChange={handleChange}
                   type="number"
                   placeholder="Mark"
                 />
@@ -404,8 +294,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
               <FloatingLabel controlId="Date" label="Date" className="mb-3">
                 <Form.Control
                   name="date"
-                  value={date}
-                  onChange={handleChange}
                   type="date"
                   placeholder="Date"
                 />
@@ -417,8 +305,6 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
                 <Form.Control
                   as="textarea"
                   name="feedback"
-                  value={feedback}
-                  onChange={handleChange}
                   placeholder="Feedback"
                   style={{ height: "100px" }}
                 />
