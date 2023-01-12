@@ -9,7 +9,7 @@ class studentObj{
     private $profile_url;
     private $address;
     private $birthday;
-    function __construct($student_id,$user_name,$password,$email,$course_id,$teacher_id,$profile_url, $address,$birthday){
+    function __construct($student_id,$user_name,$password,$email,$course_id,$teacher_id,$profile_url,$address,$birthday){
         $this->student_id = $student_id;
         $this->user_name = $user_name;
         $this->password = $password;

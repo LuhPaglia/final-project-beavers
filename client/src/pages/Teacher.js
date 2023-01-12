@@ -26,7 +26,6 @@ const Teacher = () => {
     "Edit",
   ];
 
-
   const load = () => {
     let teacherTr = [];
 
@@ -43,7 +42,6 @@ const Teacher = () => {
       console.log(err); // LOG
     })
   }
-
   
   return (
     <>

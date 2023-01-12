@@ -8,29 +8,42 @@ $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 
     $email = $_POST['email'];
-    $user_name = $_POST['user_name'];
+    $user_name = $_POST['username'];
     $password = password_hash($_POST['password'],PASSWORD_DEFAULT) ;
-    $course_id = $_POST['course_id'];
-    $teacher_id = $_POST['teacher_id'];
+    $course_id = $_POST['courseID'];
+    $teacher_id = $_POST['teacherID'];
+
+    $profile_pic = $_FILES['profile_pic'];
+
     $address = $_POST['address'];
     $birthday = $_POST['birthday'];
 
-    $newStu = new studentObj(null,$user_name,$password,$email,$course_id,$teacher_id,$address,$birthday);
+    if(!is_dir('./data/profile/student'.$email)){   
+        mkdir('./data/profile/student/'.$email,0755);
+    }
+
+    $targetDir = "./data/profile/student/$email/";
+    if($profile_pic['type']=="image/jpeg" || $profile_pic['type']=="image/jpg" || $profile_pic['type']=="image/png"){
+        if(move_uploaded_file($profile_pic['tmp_name'],$targetDir.$profile_pic['name'])){
+            $profile_url = $targetDir.$profile_pic['name'];
+        }
+        else {
+        // Upload problem;
+        }
+    }
+
+    $newStu = new studentObj(null,$user_name,$password,$email,$course_id,$teacher_id, $profile_url, $address,$birthday);
     $valuesArray = $newStu->toInsert();
-    $fieldArray = ['user_name','password','email','course_id','teacher_id','address','birthday'];
+    $fieldArray = ['user_name','password','email','course_id','teacher_id','profile_url','address','birthday'];
 
     if($dbSrv->dbConnect()){
         if($dbSrv->insert('student_tb',$valuesArray,$fieldArray)){
             // "added";
-            header("Location: studentMng.php?msg=1");
-            exit();
         }
     } else{
         echo "DB connection problem";
     }
     // "not added";
-    header("Location: studentMng.php?msg=2");
-    exit();
 
 }
 

@@ -104,7 +104,8 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
             {role == "grade" && "Grade"}
           </Modal.Title>
         </Modal.Header>
-        <Form onSubmit={handleSubmit}>
+
+        <Form onSubmit={handleSubmit} encType="multipart/form-data">
         <Modal.Body>    
             {role != "course" && role != "grade" && (
               <FloatingLabel
