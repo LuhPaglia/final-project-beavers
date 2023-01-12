@@ -3,13 +3,25 @@ import ModalCompo from "../components/ModalCompo";
 
 import { Table, Button } from "react-bootstrap";
 
-const Dashboard = ({ role, th, tr }) => {
+const Dashboard = ({ role, th, data }) => {
   const [show, setShow] = useState(false);
 
   const edit = true;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  
+  // const load = () => {
+
+  //   let trVal = [];
+  //   data.forEach(obj => {
+  //     trVal.push(Object.values(obj))
+  //   });
+  //   console.log(trVal);
+  //   setData(trVal);
+  // }
+
 
   return (
     <>
@@ -22,8 +34,10 @@ const Dashboard = ({ role, th, tr }) => {
           </tr>
         </thead>
         <tbody>
-          {tr.map((td) => (
-            <tr>
+          {(data!=null) ?
+
+          data.map((td,idx) => (
+            <tr key={idx}>
               {td.map((element, index) =>
                 role == "teacher" && index == 4 && element != null ? (
                   <td key={index}>${element}</td>
@@ -39,7 +53,10 @@ const Dashboard = ({ role, th, tr }) => {
                 </td>
               )}
             </tr>
-          ))}
+          ))
+
+          : null
+          }
         </tbody>
       </Table>
       {show && <ModalCompo edit={edit} role={role} show={show} onClose={handleClose} />}
