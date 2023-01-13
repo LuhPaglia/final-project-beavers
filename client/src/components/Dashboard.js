@@ -3,13 +3,29 @@ import ModalCompo from "../components/ModalCompo";
 
 import { Table, Button } from "react-bootstrap";
 
-const Dashboard = ({ role, th, data, setData }) => {
+const Dashboard = ({ role, th, data, setData, fields }) => {
   const [show, setShow] = useState(false);
 
   const edit = true;
 
+  const [prev, setPrev] = useState();
+
+
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (e) => {
+
+    let selectedId = e.target.value;
+    let prevVal = {};
+
+    fields.forEach((th, idx) => {
+      prevVal[th] = data[selectedId][idx];
+    });
+
+    console.log(prevVal);  // LOG
+    setPrev(prevVal);
+    setShow(true)
+
+  };
 
   // const load = () => {
   //   let trVal = [];
@@ -36,9 +52,8 @@ const Dashboard = ({ role, th, data, setData }) => {
         </thead>
         <tbody>
           {(data!=null) ?
-            data.map((td) => (
-              // tr's key == teacher_id
-              <tr key={td[0]}>
+            data.map((td,idx) => (
+              <tr key={idx}>
                 {td.map((element, index) =>
                   role == "teacher" && index == 4 && element != null ? (
                     <td key={index}>${element}</td>
@@ -47,8 +62,9 @@ const Dashboard = ({ role, th, data, setData }) => {
                   )
                 )}
                 {role != "admin" && role != "course" && (
+                  // each btn value == teacher_id
                   <td>
-                    <Button variant="success" onClick={handleShow}>
+                    <Button variant="success" onClick={handleShow} value={idx}>
                       Edit
                     </Button>
                   </td>
@@ -59,7 +75,7 @@ const Dashboard = ({ role, th, data, setData }) => {
           }
         </tbody>
       </Table>
-      {show && <ModalCompo edit={edit} role={role} show={show} onClose={handleClose} />}
+      {show && <ModalCompo edit={edit} role={role} show={show} onClose={handleClose} prev={prev}/>}
     </>
   );
 };

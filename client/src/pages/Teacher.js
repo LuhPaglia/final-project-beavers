@@ -9,6 +9,8 @@ const Teacher = () => {
   const [show, setShow] = useState(false);
 
   const [data,setData] = useState();
+  const [fields,setFields] = useState();
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,6 +32,7 @@ const Teacher = () => {
 
   const load = () => {
     let dataTr = [];
+    let fieldName = [];
 
     axiosSrv.get('teacherSelect.php')
     .then(res=>{
@@ -38,7 +41,12 @@ const Teacher = () => {
       res.data.forEach(obj => {
         dataTr.push(Object.values(obj))
       });
-      setData(dataTr)
+      fieldName =Object.keys(res.data[0]);
+
+      setData(dataTr);
+      setFields(fieldName);
+      console.log(fieldName); // LOG
+
     })
     .catch(err=>{
       console.log(err); // LOG
@@ -68,7 +76,7 @@ const Teacher = () => {
           </Col>
         </Row>
         <Row>
-          <Dashboard data={data} setData={setData} role={teacher} th={teacherTh} />
+          <Dashboard data={data} setData={setData} fields={fields} role={teacher} th={teacherTh} />
         </Row>
       </Container>
       {show && <ModalCompo role={teacher} show={show} onClose={handleClose} load={load} />}

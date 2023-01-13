@@ -7,10 +7,10 @@ $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 
-    $user_name = $_POST['username'];
+    $user_name = $_POST['user_name'];
     $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
     $email = $_POST['email'];
-    $course_id = $_POST['courseID'];
+    $course_id = $_POST['course_id'];
     $salary = $_POST['salary'];
     $address = $_POST['address'];
     $birthday = $_POST['birthday'];
