@@ -6,5 +6,6 @@ class axiosSrv{
     get(pageName,data=""){
         return httpCommon.get(pageName,data);
     }
+    
 }
 export default new axiosSrv();

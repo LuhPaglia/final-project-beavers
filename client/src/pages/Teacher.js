@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
 import axiosSrv from "../Services/axiosSrv";
@@ -26,22 +26,33 @@ const Teacher = () => {
     "Edit",
   ];
 
+  let firstLoad = true;
+
   const load = () => {
-    let teacherTr = [];
+    let dataTr = [];
 
     axiosSrv.get('teacherSelect.php')
     .then(res=>{
-      console.log(res.data); // LOG
+      console.log(res.data, "load"); // LOG
 
       res.data.forEach(obj => {
-        teacherTr.push(Object.values(obj))
+        dataTr.push(Object.values(obj))
       });
-      setData(teacherTr)
+      setData(dataTr)
     })
     .catch(err=>{
       console.log(err); // LOG
     })
   }
+
+  useEffect(()=>{
+    if(firstLoad) {
+      load();
+      firstLoad = false;
+      console.log("Teacher useEffect"); // LOG
+    }
+  },[]);
+
   
   return (
     <>
@@ -51,20 +62,16 @@ const Teacher = () => {
             <h1>Teacher Management</h1>
           </Col>
           <Col>
-
-          {/* how to hook when add/edit object?? */}
-          <button onClick={load}>load</button> 
-
             <Button variant="success" onClick={handleShow}>
               Add
             </Button>
           </Col>
         </Row>
         <Row>
-          <Dashboard data={data} role={teacher} th={teacherTh} />
+          <Dashboard data={data} setData={setData} role={teacher} th={teacherTh} />
         </Row>
       </Container>
-      {show && <ModalCompo role={teacher} show={show} onClose={handleClose} />}
+      {show && <ModalCompo role={teacher} show={show} onClose={handleClose} load={load} />}
     </>
   );
 };

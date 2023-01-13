@@ -3,10 +3,9 @@ import axiosSrv from "../Services/axiosSrv";
 
 import { Button, Form, FloatingLabel, Modal } from "react-bootstrap";
 
-const ModalCompo = ({ edit, role, show, onClose }) => {
+const ModalCompo = ({ edit, role, show, onClose, load}) => {
   
   const handleSubmit = (e) => {
-    console.log("HERE");
     e.preventDefault(); // Blocking default action which occurs page moving when the form is submitted.
 
     const formData = new FormData(e.target);
@@ -23,6 +22,7 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
           axiosSrv.post("adminUserAdd.php",formData)
           .then(res=>{
             console.log(res.data);
+            load();
           })
           .catch((error) => {
             console.log(error.response);
@@ -33,6 +33,7 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
           axiosSrv.post("courseAdd.php",formData)
           .then(res=>{
             console.log(res.data);
+            load();
           })
           .catch((error) => {
             console.log(error.response);
@@ -42,7 +43,8 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
         case "teacher":
           axiosSrv.post("teacherAdd.php",formData)
           .then(res=>{
-            console.log(res.data); // new teacher data
+            console.log(res.data); // LOG new teacher data insert
+            load();
           })
           .catch((error) => {
             console.log(error.response);
@@ -53,6 +55,7 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
           axiosSrv.post("studentAdd.php",formData)
           .then(res=>{
             console.log(res.data);
+            load();
           })
           .catch((error) => {
             console.log(error.response);
@@ -63,6 +66,7 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
           axiosSrv.post("gradeAdd.php",formData)
           .then(res=>{
             console.log(res.data);
+            load();
           })
           .catch((error) => {
             console.log(error.response);
@@ -72,11 +76,15 @@ const ModalCompo = ({ edit, role, show, onClose }) => {
         default:
           return null;
       }
+
+      onClose();
+
     } else {
       // Edit user
     }
 
   };
+
 
   const course = [
     [1, "Fundamentals of Front End Web Development and HTML", null],

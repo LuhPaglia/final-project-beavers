@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalCompo from "../components/ModalCompo";
 
 import { Table, Button } from "react-bootstrap";
 
-const Dashboard = ({ role, th, data }) => {
+const Dashboard = ({ role, th, data, setData }) => {
   const [show, setShow] = useState(false);
 
   const edit = true;
@@ -13,7 +13,6 @@ const Dashboard = ({ role, th, data }) => {
 
   
   // const load = () => {
-
   //   let trVal = [];
   //   data.forEach(obj => {
   //     trVal.push(Object.values(obj))
@@ -22,6 +21,9 @@ const Dashboard = ({ role, th, data }) => {
   //   setData(trVal);
   // }
 
+  useEffect(()=>{
+    console.log("Dashboard render"); // LOG
+  })
 
   return (
     <>
@@ -35,26 +37,24 @@ const Dashboard = ({ role, th, data }) => {
         </thead>
         <tbody>
           {(data!=null) ?
-
-          data.map((td,idx) => (
-            <tr key={idx}>
-              {td.map((element, index) =>
-                role == "teacher" && index == 4 && element != null ? (
-                  <td key={index}>${element}</td>
-                ) : (
-                  <td key={index}>{element}</td>
-                )
-              )}
-              {role != "admin" && role != "course" && (
-                <td>
-                  <Button variant="success" onClick={handleShow}>
-                    Edit
-                  </Button>
-                </td>
-              )}
-            </tr>
+            data.map((td,idx) => (
+              <tr key={idx}>
+                {td.map((element, index) =>
+                  role == "teacher" && index == 4 && element != null ? (
+                    <td key={index}>${element}</td>
+                  ) : (
+                    <td key={index}>{element}</td>
+                  )
+                )}
+                {role != "admin" && role != "course" && (
+                  <td>
+                    <Button variant="success" onClick={handleShow}>
+                      Edit
+                    </Button>
+                  </td>
+                )}
+              </tr>
           ))
-
           : null
           }
         </tbody>
