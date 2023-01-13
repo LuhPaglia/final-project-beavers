@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
+import axiosSrv from "../Services/axiosSrv";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 const Teacher = () => {
   const [show, setShow] = useState(false);
+
+  const [data,setData] = useState();
+  const [fields,setFields] = useState();
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,6 +35,40 @@ const Teacher = () => {
     [4, 'ifealty3', 'csurmon3@princeton.edu', 4, null, '6617 Victoria Trail', '1965-9-26']
   ]
 
+  let firstLoad = true;
+
+  const load = () => {
+    let dataTr = [];
+    let fieldName = [];
+
+    axiosSrv.get('teacherSelect.php')
+    .then(res=>{
+      console.log(res.data, "load"); // LOG
+
+      res.data.forEach(obj => {
+        dataTr.push(Object.values(obj))
+      });
+      fieldName =Object.keys(res.data[0]);
+
+      setData(dataTr);
+      setFields(fieldName);
+      console.log(fieldName); // LOG
+
+    })
+    .catch(err=>{
+      console.log(err); // LOG
+    })
+  }
+
+  useEffect(()=>{
+    if(firstLoad) {
+      load();
+      firstLoad = false;
+      console.log("Teacher useEffect"); // LOG
+    }
+  },[]);
+
+  
   return (
     <>
       <Container>
@@ -44,13 +83,12 @@ const Teacher = () => {
           </Col>
         </Row>
         <Row>
-          <Dashboard role={teacher} th={teacherTh} tr={teacherTr} />
+          <Dashboard data={data} setData={setData} fields={fields} role={teacher} th={teacherTh} tr={teacherTr}/>
         </Row>
       </Container>
-      {show && <ModalCompo role={teacher} show={show} onClose={handleClose} />}
+      {show && <ModalCompo role={teacher} show={show} onClose={handleClose} load={load} />}
     </>
   );
 };
 
 export default Teacher;
-
