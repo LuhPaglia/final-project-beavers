@@ -4,6 +4,17 @@ import axiosSrv from "../Services/axiosSrv";
 import { Button, Form, FloatingLabel, Modal } from "react-bootstrap";
 
 const ModalCompo = ({ edit, role, show, onClose, load}) => {
+
+  const insertLoad = (pageName, data) => {
+    axiosSrv.post(pageName,data)
+    .then(res=>{
+      console.log(res.data);
+      load(); // LOG - data insert
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
+  }
   
   const handleSubmit = (e) => {
     e.preventDefault(); // Blocking default action which occurs page moving when the form is submitted.
@@ -19,58 +30,19 @@ const ModalCompo = ({ edit, role, show, onClose, load}) => {
       // ADD user
       switch (role) {
         case "admin":
-          axiosSrv.post("adminUserAdd.php",formData)
-          .then(res=>{
-            console.log(res.data);
-            load();
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
+          insertLoad("adminUserAdd.php",formData);
         break;
-
         case "course":
-          axiosSrv.post("courseAdd.php",formData)
-          .then(res=>{
-            console.log(res.data);
-            load();
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
+          insertLoad("courseAdd.php",formData);
         break;
-
         case "teacher":
-          axiosSrv.post("teacherAdd.php",formData)
-          .then(res=>{
-            console.log(res.data); // LOG new teacher data insert
-            load();
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
+          insertLoad("teacherAdd.php",formData);
         break;
-         
         case "student":
-          axiosSrv.post("studentAdd.php",formData)
-          .then(res=>{
-            console.log(res.data);
-            load();
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
+          insertLoad("studentAdd.php",formData);
         break;
-
         case "grade":
-          axiosSrv.post("gradeAdd.php",formData)
-          .then(res=>{
-            console.log(res.data);
-            load();
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
+          insertLoad("gradeAdd.php",formData);
           break;
 
         default:

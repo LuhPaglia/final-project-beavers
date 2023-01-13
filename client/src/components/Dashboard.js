@@ -11,7 +11,6 @@ const Dashboard = ({ role, th, data, setData }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  
   // const load = () => {
   //   let trVal = [];
   //   data.forEach(obj => {
@@ -37,8 +36,9 @@ const Dashboard = ({ role, th, data, setData }) => {
         </thead>
         <tbody>
           {(data!=null) ?
-            data.map((td,idx) => (
-              <tr key={idx}>
+            data.map((td) => (
+              // tr's key == teacher_id
+              <tr key={td[0]}>
                 {td.map((element, index) =>
                   role == "teacher" && index == 4 && element != null ? (
                     <td key={index}>${element}</td>
