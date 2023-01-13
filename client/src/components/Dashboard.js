@@ -14,27 +14,20 @@ const Dashboard = ({ role, th, data, setData, fields,tr }) => {
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
 
-    let selectedId = e.target.value;
-    let prevVal = {};
+    // DON'T DELETE / HAVE TO CHECK WHEN MERGE
+    // let selectedId = e.target.value;
+    // let prevVal = {};
 
-    fields.forEach((th, idx) => {
-      prevVal[th] = data[selectedId][idx];
-    });
+    // fields.forEach((th, idx) => {
+    //   prevVal[th] = data[selectedId][idx];
+    // });
 
-    console.log(prevVal);  // LOG
-    setPrev(prevVal);
+    // console.log(prevVal);  // LOG
+    // setPrev(prevVal);
     setShow(true)
 
   };
 
-  // const load = () => {
-  //   let trVal = [];
-  //   data.forEach(obj => {
-  //     trVal.push(Object.values(obj))
-  //   });
-  //   console.log(trVal);
-  //   setData(trVal);
-  // }
 
   useEffect(()=>{
     console.log("Dashboard render"); // LOG
@@ -51,7 +44,7 @@ const Dashboard = ({ role, th, data, setData, fields,tr }) => {
           </tr>
         </thead>
         <tbody>
-          {/* mockdata */}
+          {/* mockdata : HAVE TO CHECK WHEN MERGE*/}
           {
             tr.map((td,idx) => (
               <tr key={idx}>

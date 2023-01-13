@@ -62,7 +62,8 @@ const Teacher = () => {
 
   useEffect(()=>{
     if(firstLoad) {
-      load();
+      // DON'T DELETE / HAVE TO CHECK WHEN MERGE
+      // load();
       firstLoad = false;
       console.log("Teacher useEffect"); // LOG
     }
