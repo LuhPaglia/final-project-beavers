@@ -2,13 +2,12 @@ import React from 'react';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useState } from 'react';
 import { FaAdn, FaChalkboardTeacher, FaGlassCheers, FaGraduationCap, FaMagic, FaMastodon, FaSchool, FaStudiovinari, FaUser } from 'react-icons/fa';
-import { styles } from '../styles.js';
+import { StyledLogin } from '../styles.js';
 
 const Login = () => {
 
   const [shPas,setShPas] = useState("password");
-  const [color,setColor] = useState(styles.green);
-  const [bgColor,setBgColor] = useState(styles.bgEnd);
+
   const shBtn = (e) => {
     console.log(e);
     if(e.target.innerText == "Show"){
@@ -21,70 +20,58 @@ const Login = () => {
 }
 
 return (
-  <div style={styles.StyledLogin}>
+  <StyledLogin>
     <Container>
-      <h1 className="mt-5 mb-4" style={styles.color}>Login</h1>
+      <h1 className="mt-5 mb-4">Login</h1>
 
       <Form>
-        <fieldset style={styles.fieldset}>  
+        <fieldset>  
           <Form.Group as={Row} className="mb-3">
             <Col sm={12}>
               <Form.Check
                 type="radio"
-                label={<><FaAdn style={styles.color} /> Admin </>}
+                label={<><FaAdn color='green'/> Admin </>}
                 name="role"
                 id="admin"
-                onChange={styles.radioCh}
-                onFocus={styles.radioCh}
-                onBlur={styles.radioCh}
               />
               <Form.Check 
                 type="radio"
-                label={<><FaChalkboardTeacher style={styles.color} /> Teacher</>}
+                label={<><FaChalkboardTeacher color='green'/> Teacher</>}
                 name="role"
                 id="teacher"
-                onChange={styles.radioCh}
-                onFocus={styles.radioCh}
-                onBlur={styles.radioCh}
-
               />
               <Form.Check 
                 type="radio"
-                label={<><FaGlassCheers style={styles.color} /> Student </>}
+                label={<><FaGlassCheers color='green'/> Student </>}
                 name="role"
                 id="student"
-                onChange={styles.radioCh}
-                onFocus={styles.radioCh}
-                onBlur={styles.radioCh}
               />
-
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm={12}>
-              <Form.Control type={shPas} placeholder="Email" onFocus={styles.bgCh} onBlur={styles.bgCh} style={styles.font}/>
+              <Form.Control placeholder="Email"/>
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm={12}>
-              <Form.Control type={shPas} placeholder="Password" onFocus={styles.bgCh} onBlur={styles.bgCh} style={styles.font}/>
-              <div style={{position:'absolute',top:'46%',right:'38%'}}>
-                <Button variant="link" onClick={shBtn} style={styles.color}>Show</Button>
+              <Form.Control type={shPas} placeholder="Password"/>
+              <div>
+                <Button variant="link" onClick={shBtn}>Show</Button>
               </div>
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm={12}>
-              <Button variant="success" onMouseOver={()=>setBgColor(styles.bgHover)} onMouseOut={()=>setBgColor(styles.bgEnd)} onClick={()=>setColor(styles.white)} style={bgColor}>
+              <Button variant="success">
                 Login
               </Button>
             </Col>
           </Form.Group>
         </fieldset>
       </Form>
-      <p>You don't have an account yet? <a href='#' style={styles.green}>Join us!</a></p>
     </Container>
-  </div>
+  </StyledLogin>
 )
 }
 

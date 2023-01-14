@@ -37,7 +37,7 @@ const Grade = () => {
     ],
   ];
   return (
-    <>
+    <div className='page'>
       <Container>
         <Row>
           <Col>
@@ -54,7 +54,7 @@ const Grade = () => {
         </Row>
       </Container>
       {show && <ModalCompo role={grade} show={show} onClose={handleClose} />}
-    </>
+    </div>
   );
 };
 

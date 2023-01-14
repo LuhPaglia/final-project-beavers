@@ -56,11 +56,20 @@ const Admin = () => {
     [6, "Introduction to Content Management Systems with WordPress", null],
     [7, "courseTest", "courseTestcourseTest"],
   ];
+
+  const style = {
+    display : 'flex',
+    flexDirection:'column',
+    rowGap: '5vh'
+  }
+
   return (
-    <>
+    <div className='page'>
       <Container>
-        <Row className="gx-5">
-          <Col>
+        <Row>
+          <Col  style={style}>
+          <Row>
+            <Col>
             <Row>
               <Col>
                 <h1>ADMIN</h1>
@@ -71,12 +80,15 @@ const Admin = () => {
                 </Button>
               </Col>
             </Row>
+
             <Row>
               <Dashboard role={admin} th={adminTh} tr={adminTr} />
-            </Row>
+          </Row>
           </Col>
+        </Row>
 
-          <Col>
+          <Row>
+            <Col>
             <Row>
               <Col>
                 <h1>COURSES</h1>
@@ -87,15 +99,18 @@ const Admin = () => {
                 </Button>
               </Col>
             </Row>
+
             <Row>
               <Dashboard role={course} th={courseTh} tr={courseTr} />
             </Row>
+            </Col>
+          </Row>
           </Col>
         </Row>
       </Container>
       {showAdmin && <ModalCompo role={admin} show={showAdmin} onClose={handleCloseAdmin} />}
       {showCourse && <ModalCompo role={course} show={showCourse} onClose={handleCloseCoourse} />}
-    </>
+    </div>
   );
 };
 
