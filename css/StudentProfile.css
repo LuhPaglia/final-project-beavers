@@ -1,11 +1,9 @@
-import styled from 'styled-components'
-export const StyledStudentProfile = styled.div`
 * {
   padding: 0;
   margin: 0;
 }
 
-.profile{
+.profile {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +17,8 @@ aside {
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 5vh;
+  -moz-column-gap: 5vh;
+       column-gap: 5vh;
   width: 80vh;
   height: 70vh;
   border-radius: 10px;
@@ -47,8 +46,4 @@ td {
 footer {
   background-color: #198754;
   height: 10vh;
-}`;
-export const StyledTeacher = styled.div`
-  padding-top:4vh;
-`;
-
+}/*# sourceMappingURL=StudentProfile.css.map */
