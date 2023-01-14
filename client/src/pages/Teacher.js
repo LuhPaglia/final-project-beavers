@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
 import {StyledTeacher} from "../styles";
+import axiosSrv from "../Services/axiosSrv";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
+import { Prev } from "react-bootstrap/esm/PageItem";
 
 const Teacher = () => {
   const [show, setShow] = useState(false);
+
+  const [data,setData] = useState();
+  const [fields,setFields] = useState();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const teacher = "teacher";
+
+  const deletePage = 'teacher/teacherDelete.php';
 
   const teacherTh = [
     "Teacher ID",
@@ -22,18 +29,39 @@ const Teacher = () => {
     "Address",
     "Birthday",
     "Edit",
+    "Delete"
   ];
 
-  const teacherTr = [
-    [1, 'hconeybeer0', 'vgreatbach0@yahoo.co.jp', 1, 3349, null, '1965-9-26'],
-    [2, 'pklimczak1', 'bdrover1@ox.ac.uk', 2, 1530, '05 Caliangt Street', '1965-9-26'],
-    [3, 'rseamer2', 'gmarrow2@issuu.com', 3, null, 2374, '1965-9-26'],
-    [4, 'ifealty3', 'csurmon3@princeton.edu', 4, null, '6617 Victoria Trail', '1965-9-26']
-  ]
+  const load = () => {
+    let dataTr = [];
+    let fieldName = [];
 
+    axiosSrv.get('teacher/teacherSelect.php')
+    .then(res=>{
+      console.log(res.data, "load"); // LOG
+
+      res.data.forEach(obj => {
+        dataTr.push(Object.values(obj))
+      });
+      fieldName =Object.keys(res.data[0]);
+
+      setData(dataTr);
+      setFields(fieldName);
+      console.log(fieldName); // LOG
+
+    })
+    .catch(err=>{
+      console.log(err); // LOG
+    })
+  }
+
+  useEffect(()=>{
+    load();
+    console.log("Teacher useEffect"); // LOG
+  },[]);
+  
   return (
-    
-    <div className='page'>
+    <>
       <Container>
         <Row>
           <Col>
@@ -46,11 +74,11 @@ const Teacher = () => {
           </Col>
         </Row>
         <Row>
-          <Dashboard role={teacher} th={teacherTh} tr={teacherTr} />
+          <Dashboard data={data} fields={fields} role={teacher} th={teacherTh} load={load} deletePage={deletePage} />
         </Row>
       </Container>
-      {show && <ModalCompo role={teacher} show={show} onClose={handleClose} />}
-    </div>
+      {show && <ModalCompo role={teacher} show={show} onClose={handleClose} load={load} />}
+    </>
   );
 };
 

@@ -1,37 +1,67 @@
 import { useState, useEffect } from "react";
 import ModalCompo from "../components/ModalCompo";
+import axiosSrv from "../Services/axiosSrv";
 
 import { Table, Button } from "react-bootstrap";
 
-const Dashboard = ({ role, th, data, setData, fields,tr }) => {
-  const [show, setShow] = useState(false);
-
+const Dashboard = ({ role, th, data, fields, load, deletePage }) => {
+  
   const edit = true;
 
+  const [show, setShow] = useState(false);
   const [prev, setPrev] = useState();
-
+  const [del, setDel] = useState();
 
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
 
-    // DON'T DELETE / HAVE TO CHECK WHEN MERGE
-    // let selectedId = e.target.value;
-    // let prevVal = {};
+    let selectedId = e.target.value;
 
-    // fields.forEach((th, idx) => {
-    //   prevVal[th] = data[selectedId][idx];
-    // });
+    // selected previous value as json object
+    let prevVal = {};
+    fields.forEach((th, idx) => {
+      prevVal[th] = data[selectedId][idx];
+    });
 
-    // console.log(prevVal);  // LOG
-    // setPrev(prevVal);
+    console.log(prevVal);  // LOG
+    setPrev(prevVal);
     setShow(true)
 
   };
 
+  const deleteRow = (e) => {
+    let selectedId = e.target.value;
+
+    // selected previous value as json object
+    let delVal = {};
+    fields.forEach((th, idx) => {
+      delVal[th] = data[selectedId][idx];
+    });
+
+    console.log(delVal);  // LOG
+    setDel(delVal);
+  };
 
   useEffect(()=>{
     console.log("Dashboard render"); // LOG
   })
+
+  useEffect(()=>{
+    if (del!=null) {
+      const formData = new FormData()
+      formData.append('id', del[Object.keys(del)[0]])
+  
+      axiosSrv.post(deletePage,formData)
+      .then((res)=>{
+        console.log(res.data);
+        load();
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
+
+  },[del])
 
   return (
     <>
@@ -44,9 +74,8 @@ const Dashboard = ({ role, th, data, setData, fields,tr }) => {
           </tr>
         </thead>
         <tbody>
-          {/* mockdata : HAVE TO CHECK WHEN MERGE*/}
-          {
-            tr.map((td,idx) => (
+          {(data!=null) ?
+            data.map((td,idx) => (
               <tr key={idx}>
                 {td.map((element, index) =>
                   role == "teacher" && index == 4 && element != null ? (
@@ -56,19 +85,27 @@ const Dashboard = ({ role, th, data, setData, fields,tr }) => {
                   )
                 )}
                 {role != "admin" && role != "course" && (
-                  // each btn value == teacher_id
-                  <td>
-                    <Button variant="success" onClick={handleShow} value={idx}>
-                      Edit
+                  // each btn value == tr row index
+                  <>
+                    <td>
+                      <Button variant="success" onClick={handleShow} value={idx}>
+                        Edit
+                      </Button>
+                    </td>
+                    <td>
+                    <Button variant="success" onClick={deleteRow} value={idx}>
+                      Delete
                     </Button>
-                  </td>
+                    </td>
+                  </>
                 )}
               </tr>
           ))
+          : null
           }
         </tbody>
       </Table>
-      {show && <ModalCompo edit={edit} role={role} show={show} onClose={handleClose} prev={prev}/>}
+      {show && <ModalCompo edit={edit} role={role} show={show} onClose={handleClose} prev={prev} load={load} />}
     </>
   );
 };

@@ -3,21 +3,50 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useState } from 'react';
 import { FaAdn, FaChalkboardTeacher, FaGlassCheers, FaGraduationCap, FaMagic, FaMastodon, FaSchool, FaStudiovinari, FaUser } from 'react-icons/fa';
 import { StyledLogin } from '../styles.js';
+import axiosSrv from '../Services/axiosSrv.js';
+import cryptoJs from "crypto-js";
+
 
 const Login = () => {
 
   const [shPas,setShPas] = useState("password");
 
+  const enc = (data,key) =>{
+    const encData = cryptoJs.AES.encrypt(data,key).toString();
+    return encData;
+  };
+  const dec = (encData,key) =>{
+      const decData = cryptoJs.AES.decrypt(encData,key);
+      return decData.toString(cryptoJs.enc.Utf8);
+  };
+
   const shBtn = (e) => {
-    console.log(e);
-    if(e.target.innerText == "Show"){
-        e.target.innerText = "Hide";
-        setShPas("text");
-    }else{
-      e.target.innerText = "Show";
-      setShPas("password");
+      console.log(e);
+      if(e.target.innerText == "Show"){
+          e.target.innerText = "Hide";
+          setShPas("text");
+      }else{
+        e.target.innerText = "Show";
+        setShPas("password");
+      }
   }
-}
+  const doLogin = (e) => {
+    e.preventDefault();
+    sessionStorage.clear();
+    const formData = new FormData(e.target);
+    axiosSrv.post("login/login.php",formData)
+    .then(res=>{
+      if(res.data !== "User not found"){
+        sessionStorage.setItem("userLogged", enc(res.data.toString(), "w3L0v3pHp"));
+      }else{
+        console.log(res.data);
+      }
+      // load(); // LOG - data insert
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
+  }
 
 return (
   <StyledLogin>
