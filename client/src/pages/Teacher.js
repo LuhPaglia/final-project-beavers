@@ -11,7 +11,6 @@ const Teacher = () => {
   const [data,setData] = useState();
   const [fields,setFields] = useState();
 
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -27,8 +26,6 @@ const Teacher = () => {
     "Birthday",
     "Edit",
   ];
-
-  let firstLoad = true;
 
   const load = () => {
     let dataTr = [];
@@ -54,11 +51,8 @@ const Teacher = () => {
   }
 
   useEffect(()=>{
-    if(firstLoad) {
-      load();
-      firstLoad = false;
-      console.log("Teacher useEffect"); // LOG
-    }
+    load();
+    console.log("Teacher useEffect"); // LOG
   },[]);
   
   return (
@@ -75,7 +69,7 @@ const Teacher = () => {
           </Col>
         </Row>
         <Row>
-          <Dashboard data={data} setData={setData} fields={fields} role={teacher} th={teacherTh} />
+          <Dashboard data={data} fields={fields} role={teacher} th={teacherTh} load={load} />
         </Row>
       </Container>
       {show && <ModalCompo role={teacher} show={show} onClose={handleClose} load={load} />}
