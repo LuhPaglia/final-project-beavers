@@ -22,12 +22,12 @@ const Login = () => {
 return (
   <StyledLogin>
     <Container>
-      <h1 className="mt-5 mb-4">Login</h1>
+      <h1 className="mt-5 mb-4">LOGIN</h1>
 
       <Form>
         <fieldset>  
           <Form.Group as={Row} className="mb-3">
-            <Col sm={12}>
+            <Col sm={12} className="radiowrap">
               <Form.Check
                 type="radio"
                 label={<><FaAdn color='green'/> Admin </>}
@@ -54,11 +54,8 @@ return (
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
-            <Col sm={12}>
-              <Form.Control type={shPas} placeholder="Password"/>
-              <div>
-                <Button variant="link" onClick={shBtn}>Show</Button>
-              </div>
+            <Col sm={12} className="passwrap">
+              <Form.Control type={shPas} placeholder="Password"/><Button variant="link" onClick={shBtn}>Show</Button>
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
@@ -70,6 +67,7 @@ return (
           </Form.Group>
         </fieldset>
       </Form>
+      <p>Not a member? <a href="#">Join Us!</a></p>
     </Container>
   </StyledLogin>
 )

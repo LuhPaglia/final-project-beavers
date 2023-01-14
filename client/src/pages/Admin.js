@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
+import {StyledAdmin} from "../styles";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 
@@ -65,21 +66,22 @@ const Admin = () => {
 
   return (
     <div className='page'>
+      <StyledAdmin>
       <Container>
         <Row>
           <Col  style={style}>
           <Row>
             <Col>
-            <Row>
+            <Row className='adrow'>
               <Col>
                 <h1>ADMIN</h1>
               </Col>
-              <Col>
+              <Col className='seccol'>
                 <Button variant="success" onClick={handleShowAdmin}>
                   Add Admin
                 </Button>
               </Col>
-            </Row>
+            </Row>  
 
             <Row>
               <Dashboard role={admin} th={adminTh} tr={adminTr} />
@@ -89,11 +91,11 @@ const Admin = () => {
 
           <Row>
             <Col>
-            <Row>
+            <Row  className='adrow'>
               <Col>
                 <h1>COURSES</h1>
               </Col>
-              <Col>
+              <Col className='seccol'>
                 <Button variant="success" onClick={handleShowCoourse}>
                   Add Course
                 </Button>
@@ -108,6 +110,7 @@ const Admin = () => {
           </Col>
         </Row>
       </Container>
+      </StyledAdmin>
       {showAdmin && <ModalCompo role={admin} show={showAdmin} onClose={handleCloseAdmin} />}
       {showCourse && <ModalCompo role={course} show={showCourse} onClose={handleCloseCoourse} />}
     </div>
