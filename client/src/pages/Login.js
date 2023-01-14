@@ -58,7 +58,7 @@ return (
           <Form.Group as={Row} className="mb-3">
             <Col sm={12}>
               <Form.Control type={shPas} placeholder="Password" onFocus={styles.bgCh} onBlur={styles.bgCh} style={styles.font}/>
-              <div style={{position:'absolute',top:'100%',right:'0'}}>
+              <div>
                 <Button variant="link" onClick={shBtn} style={styles.color}>Show</Button>
               </div>
             </Col>
