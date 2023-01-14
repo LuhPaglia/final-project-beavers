@@ -3,7 +3,7 @@ import ModalCompo from "../components/ModalCompo";
 
 import { Table, Button } from "react-bootstrap";
 
-const Dashboard = ({ role, th, data, setData, fields }) => {
+const Dashboard = ({ role, th, data, fields, load }) => {
   const [show, setShow] = useState(false);
 
   const edit = true;
@@ -15,8 +15,9 @@ const Dashboard = ({ role, th, data, setData, fields }) => {
   const handleShow = (e) => {
 
     let selectedId = e.target.value;
-    let prevVal = {};
 
+    // selected previous value as json object
+    let prevVal = {};
     fields.forEach((th, idx) => {
       prevVal[th] = data[selectedId][idx];
     });
@@ -26,15 +27,6 @@ const Dashboard = ({ role, th, data, setData, fields }) => {
     setShow(true)
 
   };
-
-  // const load = () => {
-  //   let trVal = [];
-  //   data.forEach(obj => {
-  //     trVal.push(Object.values(obj))
-  //   });
-  //   console.log(trVal);
-  //   setData(trVal);
-  // }
 
   useEffect(()=>{
     console.log("Dashboard render"); // LOG
@@ -62,7 +54,7 @@ const Dashboard = ({ role, th, data, setData, fields }) => {
                   )
                 )}
                 {role != "admin" && role != "course" && (
-                  // each btn value == teacher_id
+                  // each btn value == tr row index
                   <td>
                     <Button variant="success" onClick={handleShow} value={idx}>
                       Edit
@@ -75,7 +67,7 @@ const Dashboard = ({ role, th, data, setData, fields }) => {
           }
         </tbody>
       </Table>
-      {show && <ModalCompo edit={edit} role={role} show={show} onClose={handleClose} prev={prev}/>}
+      {show && <ModalCompo edit={edit} role={role} show={show} onClose={handleClose} prev={prev} load={load} />}
     </>
   );
 };

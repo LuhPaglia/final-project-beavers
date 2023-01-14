@@ -21,6 +21,8 @@
       }
 
       $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+      // return query result
       echo json_encode($rows);
   
     }else{
