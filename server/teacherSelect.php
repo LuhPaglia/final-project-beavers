@@ -7,6 +7,7 @@
     $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
 
     if($dbcon = $dbSrv->dbConnect()){
+      
       // if(teacher login) { changing query}
       $sqlCommand = "SELECT `teacher_id`, `user_name`, `email`, `course_id`, `salary`, `address`, `birthday` FROM `teacher_tb`WHERE teacher_tb.status = 1";
       

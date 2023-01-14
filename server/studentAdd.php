@@ -8,10 +8,10 @@ $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 
     $email = $_POST['email'];
-    $user_name = $_POST['username'];
+    $user_name = $_POST['user_name'];
     $password = password_hash($_POST['password'],PASSWORD_DEFAULT) ;
-    $course_id = $_POST['courseID'];
-    $teacher_id = $_POST['teacherID'];
+    $course_id = $_POST['course_id'];
+    $teacher_id = $_POST['teacher_id'];
 
     $profile_pic = $_FILES['profile_pic'];
 

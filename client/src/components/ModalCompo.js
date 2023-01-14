@@ -117,7 +117,8 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
                   name="email"
                   type="email"
                   placeholder="name@example.com"
-                  defaultValue ={(prev!=null)?prev.email:null}
+                  // defaultValue ={(prev!=null)?prev.email:null}
+                  defaultValue ={prev?.email}
                 />
               </FloatingLabel>
             )}

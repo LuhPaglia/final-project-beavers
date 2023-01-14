@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
+import {StyledTeacher} from "../styles";
 import axiosSrv from "../Services/axiosSrv";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
-
 const Teacher = () => {
   const [show, setShow] = useState(false);
 
