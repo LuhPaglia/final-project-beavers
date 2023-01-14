@@ -49,7 +49,6 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
       }
       onClose(); // after add, close modal automatically
     } else {
-
       // Edit user
 
       switch (role) {
