@@ -9,7 +9,6 @@ const Login = () => {
   const [shPas,setShPas] = useState("password");
   const [color,setColor] = useState(styles.green);
   const [bgColor,setBgColor] = useState(styles.bgEnd);
-
   const shBtn = (e) => {
     console.log(e);
     if(e.target.innerText == "Show"){
@@ -35,19 +34,30 @@ return (
                 label={<><FaAdn style={styles.color} /> Admin </>}
                 name="role"
                 id="admin"
+                onChange={styles.radioCh}
+                onFocus={styles.radioCh}
+                onBlur={styles.radioCh}
               />
               <Form.Check 
                 type="radio"
                 label={<><FaChalkboardTeacher style={styles.color} /> Teacher</>}
                 name="role"
                 id="teacher"
+                onChange={styles.radioCh}
+                onFocus={styles.radioCh}
+                onBlur={styles.radioCh}
+
               />
               <Form.Check 
                 type="radio"
                 label={<><FaGlassCheers style={styles.color} /> Student </>}
                 name="role"
                 id="student"
+                onChange={styles.radioCh}
+                onFocus={styles.radioCh}
+                onBlur={styles.radioCh}
               />
+
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
@@ -58,7 +68,7 @@ return (
           <Form.Group as={Row} className="mb-3">
             <Col sm={12}>
               <Form.Control type={shPas} placeholder="Password" onFocus={styles.bgCh} onBlur={styles.bgCh} style={styles.font}/>
-              <div style={{position:'absolute',top:'100%',right:'0'}}>
+              <div style={{position:'absolute',top:'46%',right:'38%'}}>
                 <Button variant="link" onClick={shBtn} style={styles.color}>Show</Button>
               </div>
             </Col>
@@ -72,6 +82,7 @@ return (
           </Form.Group>
         </fieldset>
       </Form>
+      <p>You don't have an account yet? <a href='#' style={styles.green}>Join us!</a></p>
     </Container>
   </div>
 )

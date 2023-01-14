@@ -32,6 +32,21 @@ export const styles = {
         break;
     }
   },
+  radioCh: (e) =>{
+    switch(e.type){
+        case "change"&&"focus":
+            e.target.style.backgroundColor="#198722";
+            e.target.style.boxShadow="0 0 0 3px rgb(25 135 34 / 25%)";
+            e.target.style.border="none";
+        break;
+        case "blur":
+          e.target.style.backgroundColor="white";
+          e.target.style.boxShadow="none";
+          e.target.style.border="1px solid #ced4da";
+        break;
+    }
+  },
+
   color: { marginRight: '8px', color:'#198722'},
   font: { fontFamily: 'Sans-serif', fontSize: '16px', color: '#333'},
   fieldset: { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center'}
