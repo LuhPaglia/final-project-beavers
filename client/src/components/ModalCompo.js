@@ -29,16 +29,16 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
       // ADD user
       switch (role) {
         case "admin":
-          insertLoad("adminUserAdd.php",formData);
+          insertLoad("admin/adminUserAdd.php",formData);
         break;
         case "course":
-          insertLoad("courseAdd.php",formData);
+          insertLoad("course/courseAdd.php",formData);
         break;
         case "teacher":
-          insertLoad("teacherAdd.php",formData);
+          insertLoad("teacher/teacherAdd.php",formData);
         break;
         case "student":
-          insertLoad("studentAdd.php",formData);
+          insertLoad("student/studentAdd.php",formData);
         break;
         case "grade":
           insertLoad("gradeAdd.php",formData);
