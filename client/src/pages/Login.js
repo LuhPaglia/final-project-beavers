@@ -48,64 +48,58 @@ const Login = () => {
     });
   }
 
-  return (
-    <StyledLogin>
-      <Container>
-        <h1 className="mt-5 mb-4">Login</h1>
+return (
+  <StyledLogin>
+    <Container>
+      <h1 className="mt-5 mb-4">LOGIN</h1>
 
-        <Form onSubmit={doLogin}>
-          <fieldset>  
-            <Form.Group as={Row} className="mb-3">
-              <Col sm={12}>
-                <Form.Check
-                  type="radio"
-                  label={<><FaAdn color='green'/> Admin </>}
-                  name="role"
-                  id="admin"
-                  value="admin"
-                />
-                <Form.Check 
-                  type="radio"
-                  label={<><FaChalkboardTeacher color='green'/> Teacher</>}
-                  name="role"
-                  id="teacher"
-                  value="teacher"
-                />
-                <Form.Check 
-                  type="radio"
-                  label={<><FaGlassCheers color='green'/> Student </>}
-                  name="role"
-                  id="student"
-                  value="student"
-                />
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} className="mb-3">
-              <Col sm={12}>
-                <Form.Control name="email" placeholder="Email"/>
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} className="mb-3">
-              <Col sm={12}>
-                <Form.Control type={shPas} name="pass" placeholder="Password"/>
-                <div>
-                  <Button variant="link" onClick={shBtn}>Show</Button>
-                </div>
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} className="mb-3">
-              <Col sm={12}>
-                <Button variant="success" type="submit">
-                  Login
-                </Button>
-              </Col>
-            </Form.Group>
-          </fieldset>
-        
-        </Form>
-      </Container>
-    </StyledLogin>
-  )
+      <Form>
+        <fieldset>  
+          <Form.Group as={Row} className="mb-3">
+            <Col sm={12} className="radiowrap">
+              <Form.Check
+                type="radio"
+                label={<><FaAdn color='green'/> Admin </>}
+                name="role"
+                id="admin"
+              />
+              <Form.Check 
+                type="radio"
+                label={<><FaChalkboardTeacher color='green'/> Teacher</>}
+                name="role"
+                id="teacher"
+              />
+              <Form.Check 
+                type="radio"
+                label={<><FaGlassCheers color='green'/> Student </>}
+                name="role"
+                id="student"
+              />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="mb-3">
+            <Col sm={12}>
+              <Form.Control placeholder="Email"/>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="mb-3">
+            <Col sm={12} className="passwrap">
+              <Form.Control type={shPas} placeholder="Password"/><Button variant="link" onClick={shBtn}>Show</Button>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="mb-3">
+            <Col sm={12}>
+              <Button variant="success">
+                Login
+              </Button>
+            </Col>
+          </Form.Group>
+        </fieldset>
+      </Form>
+      <p>Not a member? <a href="#">Join Us!</a></p>
+    </Container>
+  </StyledLogin>
+)
 }
 
 export default Login;
