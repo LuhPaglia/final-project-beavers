@@ -60,7 +60,6 @@ const Teacher = () => {
       console.log("Teacher useEffect"); // LOG
     }
   },[]);
-
   
   return (
     <>
@@ -85,4 +84,3 @@ const Teacher = () => {
 };
 
 export default Teacher;
-
