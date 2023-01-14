@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import ModalCompo from "../components/ModalCompo";
+import axiosSrv from "../Services/axiosSrv";
 
 import { Table, Button } from "react-bootstrap";
 
-const Dashboard = ({ role, th, data, fields, load }) => {
-  const [show, setShow] = useState(false);
-
+const Dashboard = ({ role, th, data, fields, load, deletePage }) => {
+  
   const edit = true;
 
+  const [show, setShow] = useState(false);
   const [prev, setPrev] = useState();
-
+  const [del, setDel] = useState();
 
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
@@ -28,9 +29,39 @@ const Dashboard = ({ role, th, data, fields, load }) => {
 
   };
 
+  const deleteRow = (e) => {
+    let selectedId = e.target.value;
+
+    // selected previous value as json object
+    let delVal = {};
+    fields.forEach((th, idx) => {
+      delVal[th] = data[selectedId][idx];
+    });
+
+    console.log(delVal);  // LOG
+    setDel(delVal);
+  };
+
   useEffect(()=>{
     console.log("Dashboard render"); // LOG
   })
+
+  useEffect(()=>{
+    if (del!=null) {
+      const formData = new FormData()
+      formData.append('id', del[Object.keys(del)[0]])
+  
+      axiosSrv.post(deletePage,formData)
+      .then((res)=>{
+        console.log(res.data);
+        load();
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
+
+  },[del])
 
   return (
     <>
@@ -55,11 +86,18 @@ const Dashboard = ({ role, th, data, fields, load }) => {
                 )}
                 {role != "admin" && role != "course" && (
                   // each btn value == tr row index
-                  <td>
-                    <Button variant="success" onClick={handleShow} value={idx}>
-                      Edit
+                  <>
+                    <td>
+                      <Button variant="success" onClick={handleShow} value={idx}>
+                        Edit
+                      </Button>
+                    </td>
+                    <td>
+                    <Button variant="success" onClick={deleteRow} value={idx}>
+                      Delete
                     </Button>
-                  </td>
+                    </td>
+                  </>
                 )}
               </tr>
           ))

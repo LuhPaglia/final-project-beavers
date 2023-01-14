@@ -1,7 +1,6 @@
 <?php
-include './data/config.php';
-include './services/dbservices.php';
-include './objects/adminObj.php';
+include '../../services/dbservices.php';
+include '../../objects/adminObj.php';
 
 $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
 

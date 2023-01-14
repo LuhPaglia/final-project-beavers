@@ -5,6 +5,8 @@ import {StyledTeacher} from "../styles";
 import axiosSrv from "../Services/axiosSrv";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
+import { Prev } from "react-bootstrap/esm/PageItem";
+
 const Teacher = () => {
   const [show, setShow] = useState(false);
 
@@ -16,6 +18,8 @@ const Teacher = () => {
 
   const teacher = "teacher";
 
+  const deletePage = 'teacher/teacherDelete.php';
+
   const teacherTh = [
     "Teacher ID",
     "Username",
@@ -25,13 +29,14 @@ const Teacher = () => {
     "Address",
     "Birthday",
     "Edit",
+    "Delete"
   ];
 
   const load = () => {
     let dataTr = [];
     let fieldName = [];
 
-    axiosSrv.get('teacherSelect.php')
+    axiosSrv.get('teacher/teacherSelect.php')
     .then(res=>{
       console.log(res.data, "load"); // LOG
 
@@ -69,7 +74,7 @@ const Teacher = () => {
           </Col>
         </Row>
         <Row>
-          <Dashboard data={data} fields={fields} role={teacher} th={teacherTh} load={load} />
+          <Dashboard data={data} fields={fields} role={teacher} th={teacherTh} load={load} deletePage={deletePage} />
         </Row>
       </Container>
       {show && <ModalCompo role={teacher} show={show} onClose={handleClose} load={load} />}

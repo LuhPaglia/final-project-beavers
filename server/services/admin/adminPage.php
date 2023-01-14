@@ -1,6 +1,5 @@
 <?php
-  include './pages/header.php';
-  include './services/dbservices.php';
+  include '../../services/dbservices.php';
   $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
   if($dbSrv->dbConnect()){
   }else{

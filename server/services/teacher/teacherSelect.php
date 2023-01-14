@@ -1,6 +1,5 @@
 <?php
-  include './data/config.php';
-  include './services/dbservices.php';
+  include '../../services/dbservices.php';
   
   if ($_SERVER["REQUEST_METHOD"] == 'GET') {
 
