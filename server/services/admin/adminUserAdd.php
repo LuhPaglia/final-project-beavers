@@ -1,5 +1,5 @@
 <?php
-include '../../services/dbservices.php';
+include '../dbservices.php';
 include '../../objects/adminObj.php';
 
 $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
@@ -17,9 +17,12 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     $fieldArray = ['user_name','password','email','birthday','address'];
     if($dbSrv->dbConnect()){
         if($dbSrv->insert('admin_tb',$valuesArray,$fieldArray)){
+            echo "1";
+        }else{
+            echo "0";
         }
     } else{
-        echo "DB connection problem";
+        echo "-1";
     }
 }
 

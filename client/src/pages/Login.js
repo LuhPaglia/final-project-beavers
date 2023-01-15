@@ -34,14 +34,15 @@ const Login = () => {
     e.preventDefault();
     sessionStorage.clear();
     const formData = new FormData(e.target);
+    console.log(formData.get("role"));
     axiosSrv.post("login/login.php",formData)
     .then(res=>{
+      console.log(res);
       if(res.data !== "User not found"){
         sessionStorage.setItem("userLogged", enc(res.data.toString(), "w3L0v3pHp"));
       }else{
         console.log(res.data);
       }
-      // load(); // LOG - data insert
     })
     .catch((error) => {
       console.log(error.response);
@@ -53,7 +54,7 @@ return (
     <Container>
       <h1 className="mt-5 mb-4">LOGIN</h1>
 
-      <Form>
+      <Form onSubmit={doLogin}>
         <fieldset>  
           <Form.Group as={Row} className="mb-3">
             <Col sm={12} className="radiowrap">
@@ -62,34 +63,37 @@ return (
                 label={<><FaAdn color='green'/> Admin </>}
                 name="role"
                 id="admin"
+                value="admin"
               />
               <Form.Check 
                 type="radio"
                 label={<><FaChalkboardTeacher color='green'/> Teacher</>}
                 name="role"
                 id="teacher"
+                value="teacher"
               />
               <Form.Check 
                 type="radio"
                 label={<><FaGlassCheers color='green'/> Student </>}
                 name="role"
                 id="student"
+                value="student"
               />
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm={12}>
-              <Form.Control placeholder="Email"/>
+              <Form.Control  placeholder="Email" name="email"/>
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm={12} className="passwrap">
-              <Form.Control type={shPas} placeholder="Password"/><Button variant="link" onClick={shBtn}>Show</Button>
+              <Form.Control type={shPas} placeholder="Password" name="pass"/><Button variant="link" onClick={shBtn}>Show</Button>
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm={12}>
-              <Button variant="success">
+              <Button variant="success" type="submit">
                 Login
               </Button>
             </Col>
