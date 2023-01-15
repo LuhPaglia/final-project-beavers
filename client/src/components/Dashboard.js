@@ -93,7 +93,7 @@ const Dashboard = ({ role, th, data, fields, load, deletePage }) => {
                       </Button>
                     </td>
                     <td>
-                    <Button variant="success" onClick={deleteRow} value={idx}>
+                    <Button variant="success" onClick={(e)=>{alert("Are you sure to delete a user?"); deleteRow(e);}} value={idx}>
                       Delete
                     </Button>
                     </td>
