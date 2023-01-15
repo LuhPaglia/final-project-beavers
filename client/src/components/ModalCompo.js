@@ -51,23 +51,23 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
     } else {
 
       // Edit user / pass teacher id info
-      formData.append("teacher_id",prev.teacher_id)
+      formData.append('id', prev[Object.keys(prev)[0]])
 
       switch (role) {
         case "admin":
-          resultLoad("teacherEdit.php",formData);
+          resultLoad("admin/adminUserEdit.php",formData);
         break;
         case "course":
-          resultLoad("teacherEdit.php",formData);
+          resultLoad("course/courseEdit.php",formData);
         break;
         case "teacher":
           resultLoad("teacher/teacherEdit.php",formData);
         break;
         case "student":
-          resultLoad("teacherEdit.php",formData);
+          resultLoad("student/studentEdit.php",formData);
         break;
         case "grade":
-          resultLoad("teacherEdit.php",formData);
+          resultLoad("grade/gradeEdit.php",formData);
           break;
 
         default:

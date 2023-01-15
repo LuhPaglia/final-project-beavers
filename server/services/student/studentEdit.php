@@ -5,17 +5,17 @@ $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 
-    $teacher_id = $_POST['id'];
+    $student_id = $_POST['id'];
 
-    $user_name = $_POST['user_name'];
     $email = $_POST['email'];
+    $user_name = $_POST['user_name'];
     $course_id = $_POST['course_id'];
-    $salary = $_POST['salary'];
+    $teacher_id = $_POST['teacher_id'];
     $address = $_POST['address'];
     $birthday = $_POST['birthday'];
 
      // if(teacher login) { changing query}
-     $sqlCommand = "UPDATE `teacher_tb` SET `user_name`='$user_name',`email`='$email',`course_id`=$course_id,`salary`=$salary,`address`='$address',`birthday`='$birthday' WHERE teacher_tb.teacher_id=$teacher_id";
+     $sqlCommand = "UPDATE `student_tb` SET `user_name`='$user_name',`email`='$email',`course_id`=$course_id,`teacher_id`=$teacher_id,`address`='$address',`birthday`='$birthday' WHERE student_tb.student_id=$student_id";
 
      echo $sqlCommand;
       
