@@ -61,7 +61,7 @@ const Teacher = () => {
   },[]);
   
   return (
-    <>
+    <div className="page">
       <Container>
         <Row>
           <Col>
@@ -78,7 +78,7 @@ const Teacher = () => {
         </Row>
       </Container>
       {show && <ModalCompo role={teacher} show={show} onClose={handleClose} load={load} />}
-    </>
+    </div>
   );
 };
 
