@@ -18,6 +18,7 @@ const NavbarCompo = () => {
             <Nav.Link as={Link} to="/students">Student Management</Nav.Link>
             <Nav.Link as={Link} to="/grade">Grade Management</Nav.Link>
             <Nav.Link as={Link} to="/students/:id">Student Profile</Nav.Link>
+            {/* <Nav.Link as={Link} to={`/students/${student.id}`}>Student Profile</Nav.Link> */}
           </Nav>
         </Container>
       </Navbar>

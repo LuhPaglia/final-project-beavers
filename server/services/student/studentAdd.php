@@ -17,17 +17,18 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     $address = $_POST['address'];
     $birthday = $_POST['birthday'];
 
-    if(!is_dir('./data/profile/student'.$email)){   
-        mkdir('./data/profile/student/'.$email,0755);
+    if(!is_dir('../../data/profile/student'.$email)){   
+        mkdir('../../data/profile/student/'.$email,0755);
     }
 
-    $targetDir = "./data/profile/student/$email/";
+    $targetDir = "../../data/profile/student/$email/";
     if($profile_pic['type']=="image/jpeg" || $profile_pic['type']=="image/jpg" || $profile_pic['type']=="image/png"){
         if(move_uploaded_file($profile_pic['tmp_name'],$targetDir.$profile_pic['name'])){
             $profile_url = $targetDir.$profile_pic['name'];
         }
         else {
         // Upload problem;
+            echo "0";
         }
     }
 
@@ -37,13 +38,15 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 
     if($dbSrv->dbConnect()){
         if($dbSrv->insert('student_tb',$valuesArray,$fieldArray)){
-            // "added";
+            echo "1";
+        }
+        else {
+            echo "0";
         }
     } else{
-        echo "DB connection problem";
+        echo "-1";
     }
-    // "not added";
-
+    $dbSrv->closeDb();
 }
 
 ?>
