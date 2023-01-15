@@ -1,9 +1,6 @@
 <?php
     include '../../data/config.php';
     include '../dbservices.php';
-    include '../objects/adminObj.php';
-    include '../objects/teacherObj.php';
-    include '../objects/studentObj.php';
     header('Access-Control-Allow-Origin: http://localhost:3000');
     header('Access-Control-Allow-Methods:POST');
     header('Access-Control-Allow-Header:Content-Type');
