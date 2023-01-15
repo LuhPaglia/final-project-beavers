@@ -1,14 +1,27 @@
-import Alert from "react-bootstrap/Alert";
+import { Button, Modal } from "react-bootstrap";
 
-const AlertCompo = () => {
+const AlertCompo = ({ warn, onClose, handleDelete }) => {
+  
   return (
-    <>
-      {["danger"].map((variant) => (
-        <Alert key={variant} variant={variant}>
-          This is a {variant} alert—check it out!
-        </Alert>
-      ))}
-    </>
+    <div
+      className="modal show"
+      style={{ display: 'block', position: 'initial' }}
+    >
+      <Modal show={warn} onHide={onClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Warning!</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>Are you sure to delete a user?</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onClose}>Close</Button>
+          <Button variant="success" onClick={handleDelete}>Save changes</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 }
 
