@@ -32,7 +32,7 @@ const Students = () => {
   ]
 
   return (
-    <>
+    <div className='page'>
       <Container>
         <Row>
           <Col>
@@ -49,7 +49,7 @@ const Students = () => {
         </Row>
       </Container>
       {show && <ModalCompo role={student} show={show} onClose={handleClose} />}
-    </>
+    </div>
   );
 };
 

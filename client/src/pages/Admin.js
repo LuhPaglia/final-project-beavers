@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
+import {StyledAdmin} from "../styles";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 
@@ -56,46 +57,63 @@ const Admin = () => {
     [6, "Introduction to Content Management Systems with WordPress", null],
     [7, "courseTest", "courseTestcourseTest"],
   ];
+
+  const style = {
+    display : 'flex',
+    flexDirection:'column',
+    rowGap: '5vh'
+  }
+
   return (
-    <>
+    <div className='page'>
+      <StyledAdmin>
       <Container>
-        <Row className="gx-5">
-          <Col>
-            <Row>
+        <Row>
+          <Col  style={style}>
+          <Row>
+            <Col>
+            <Row className='adrow'>
               <Col>
                 <h1>ADMIN</h1>
               </Col>
-              <Col>
+              <Col className='seccol'>
                 <Button variant="success" onClick={handleShowAdmin}>
                   Add Admin
                 </Button>
               </Col>
-            </Row>
+            </Row>  
+
             <Row>
               <Dashboard role={admin} th={adminTh} tr={adminTr} />
-            </Row>
+          </Row>
           </Col>
+        </Row>
 
-          <Col>
-            <Row>
+          <Row>
+            <Col>
+            <Row  className='adrow'>
               <Col>
                 <h1>COURSES</h1>
               </Col>
-              <Col>
+              <Col className='seccol'>
                 <Button variant="success" onClick={handleShowCoourse}>
                   Add Course
                 </Button>
               </Col>
             </Row>
+
             <Row>
               <Dashboard role={course} th={courseTh} tr={courseTr} />
             </Row>
+            </Col>
+          </Row>
           </Col>
         </Row>
       </Container>
+      </StyledAdmin>
       {showAdmin && <ModalCompo role={admin} show={showAdmin} onClose={handleCloseAdmin} />}
       {showCourse && <ModalCompo role={course} show={showCourse} onClose={handleCloseCoourse} />}
-    </>
+    </div>
   );
 };
 
