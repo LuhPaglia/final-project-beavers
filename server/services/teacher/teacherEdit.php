@@ -5,7 +5,7 @@ $dbSrv = new dbServices($hostName,$userName,$password,$dbName);
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 
-    $teacher_id = $_POST['teacher_id'];
+    $teacher_id = $_POST['id'];
 
     $user_name = $_POST['user_name'];
     $email = $_POST['email'];
@@ -17,10 +17,9 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
      // if(teacher login) { changing query}
      $sqlCommand = "UPDATE `teacher_tb` SET `user_name`='$user_name',`email`='$email',`course_id`=$course_id,`salary`=$salary,`address`='$address',`birthday`='$birthday' WHERE teacher_tb.teacher_id=$teacher_id";
 
-     echo $sqlCommand;
-      
     if($dbcon = $dbSrv->dbConnect()){
         if($dbcon->query($sqlCommand) === TRUE){
+            echo $sqlCommand;
             echo "1";
         }
         else {
