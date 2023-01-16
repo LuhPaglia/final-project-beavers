@@ -340,12 +340,12 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
             )}
 
             {role == "grade" && (
-              <FloatingLabel controlId="Date" label="Date" className="mb-3">
+              <FloatingLabel controlId="Mark Date" label="Mark Date" className="mb-3">
                 <Form.Control
-                  name="date"
+                  name="mark_date"
                   type="date"
-                  placeholder="Date"
-                  defaultValue ={prev?.date}
+                  placeholder="mark_date"
+                  defaultValue={prev?.mark_date}
                 />
               </FloatingLabel>
             )}
