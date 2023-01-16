@@ -11,28 +11,44 @@ const Classworks = () => {
 
   useEffect(()=>{
     let coursework = 0;
+    let courseworkMax = 0;
+
     let finalproject = 0;
+    let finalprojectMax = 0;
+
     let midcourse = 0;
+    let midcourseMax = 0;
+
     let participation = 0;
+    let participationMax = 0;
+
     let finalexam = 0;
-    data.forEach(({ evaluation, mark })=>{
+    let finalexamMax = 0;
+
+    data.forEach(({ evaluation, mark, mark_max })=>{
       if(evaluation == "CourseWork") {
         coursework += parseFloat(mark);
+        courseworkMax += parseFloat(mark_max);
       }
       if(evaluation == "Final Project") {
         finalproject += parseFloat(mark);
+        finalprojectMax += parseFloat(mark_max);
       }
       if(evaluation == "Mid-Course Exam"){
         midcourse += parseFloat(mark);
+        midcourseMax += parseFloat(mark_max);
       }
       if(evaluation == "Participation"){
         participation += parseFloat(mark);
+        participationMax += parseFloat(mark_max);
       }
       if(evaluation == "Final Exam"){
         finalexam += parseFloat(mark);
+        finalexamMax += parseFloat(mark_max);
       }
     })
-    let calTotal = (coursework/3) * 0.2 + finalproject * 0.3 + midcourse * 0.15 + finalexam * 0.25 + participation * 0.1;
+    let calTotal = (coursework/courseworkMax) * 0.2 + finalproject/finalprojectMax * 0.3 + midcourse/midcourseMax * 0.15 + finalexam/finalexamMax * 0.25 + participation/participationMax * 0.1;
+    calTotal = calTotal * 100
     setTotal(calTotal);
   }, [])
   return (
@@ -63,14 +79,14 @@ const Classworks = () => {
         <Row>
               <Accordion defaultActiveKey="0">
                 {data.map(
-                  ({ classwork, mark_date, evaluation, mark, feedback }, index) => (
+                  ({ classwork, mark_date, evaluation, mark, mark_max, feedback }, index) => (
                     <Accordion.Item eventKey={index}>
                       <Accordion.Header>
                         <tr>
                           <td>{classwork}</td>
                           <td>{mark_date}</td>
                           <td>{evaluation}</td>
-                          <td>{mark}</td>
+                          <td>{mark}/{mark_max}</td>
                         </tr>
                       </Accordion.Header>
                       <Accordion.Body>Comment: {feedback}</Accordion.Body>
@@ -94,7 +110,8 @@ const data = [
     student_id: 2,
     teacher_id: 3,
     course_id: 4,
-    mark: "100/100",
+    mark: 100,
+    mark_max: 100,
     mark_date: "기한 없음",
     feedback:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -107,7 +124,8 @@ const data = [
     student_id: 2,
     teacher_id: 3,
     course_id: 4,
-    mark: "94/100",
+    mark: 94,
+    mark_max: 100,
     mark_date: "2022. 12. 22. 오후 7:00",
     feedback:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -120,7 +138,8 @@ const data = [
     student_id: 2,
     teacher_id: 3,
     course_id: 4,
-    mark: "80/80",
+    mark: 80,
+    mark_max: 80,
     mark_date: "2022. 12. 25. 오후 11:59",
     feedback:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -133,7 +152,8 @@ const data = [
     student_id: 2,
     teacher_id: 3,
     course_id: 4,
-    mark: "100/100",
+    mark: 100,
+    mark_max: 100,
     mark_date: "2022. 12. 19. 오후 11:59",
     feedback:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -146,7 +166,8 @@ const data = [
     student_id: 2,
     teacher_id: 3,
     course_id: 4,
-    mark: "87/100",
+    mark: 87,
+    mark_max: 100,
     mark_date: "기한 없음",
     feedback:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -159,7 +180,8 @@ const data = [
     student_id: 2,
     teacher_id: 3,
     course_id: 4,
-    mark: "90/100",
+    mark: 90,
+    mark_max: 100,
     mark_date: "2022. 12. 12. 오후 4:00",
     feedback:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -172,7 +194,8 @@ const data = [
     student_id: 2,
     teacher_id: 3,
     course_id: 4,
-    mark: "100/100",
+    mark: 100,
+    mark_max: 100,
     mark_date: "2022. 12. 5. 오후 4:00",
     feedback:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -185,7 +208,8 @@ const data = [
     student_id: 2,
     teacher_id: 3,
     course_id: 4,
-    mark: "19/20",
+    mark: 19,
+    mark_max: 20,
     mark_date: "2022. 12. 8. 오후 4:00",
     feedback:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
