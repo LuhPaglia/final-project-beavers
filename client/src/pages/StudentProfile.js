@@ -39,6 +39,11 @@ const Student = () => {
                   <Tab.Pane eventKey="#link1">
                     <Classworks />
                   </Tab.Pane>
+                  <Tab.Pane eventKey="#link2">Not enrolled yet</Tab.Pane>
+                  <Tab.Pane eventKey="#link3">Not enrolled yet</Tab.Pane>
+                  <Tab.Pane eventKey="#link4">Not enrolled yet</Tab.Pane>
+                  <Tab.Pane eventKey="#link5">Not enrolled yet</Tab.Pane>
+                  <Tab.Pane eventKey="#link6">Not enrolled yet</Tab.Pane>
                 </Tab.Content>
               </Col>
             </Row>
