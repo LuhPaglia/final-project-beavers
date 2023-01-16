@@ -172,15 +172,22 @@ export const StyledStudentProfile = styled.div`
 
 export const StyledClassworks = styled.div`
   .totalGrade {
+    color: #0f5132 !important;
     font-size: 2.25rem;
     width: 100%;
     text-align: right;
     cursor: pointer;
   }
-  table.table{
-    font-size: 14px;
+  table.table {
+  }
+  tr {
+    display: flex;
+    width: 100%;
+    padding: 16px 20px;
   }
   td {
+    font-size: 14px;
+    width: 100%;
     text-align: left;
     &:first-child {
       font-weight: 600;
@@ -189,5 +196,43 @@ export const StyledClassworks = styled.div`
       font-weight: 600;
       text-align: right;
     }
+  }
+  .accordion-button {
+    padding: 0;
+    &:focus {
+      border-color: none;
+    }
+  }
+  .accordion-button::after,
+  .accordion-button:not(.collapsed)::after {
+    background-image: none;
+    transform: none;
+  }
+  .accordion-button:not(.collapsed) {
+    color: initial;
+  }
+  .accordion-button::after {
+    width: 0;
+    height: 0;
+  }
+  .accordion-item {
+    padding: 0;
+    border: none;
+    border-bottom: var(--bs-accordion-border-width) solid
+      var(--bs-accordion-border-color);
+  }
+  .accordion-body {
+    text-align: left;
+    font-size: 14px;
+  }
+  .accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0, 0, 0, 0.125);
+  }
+  .accordion-item:first-of-type .accordion-button {
+    border-radius: 0;
+  }
+  .accordion-button:not(.collapsed){
+    background-color: #d1e7dd;
   }
 `;
