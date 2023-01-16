@@ -48,7 +48,6 @@ const Teacher = () => {
       setData(dataTr);
       setFields(fieldName);
       console.log(fieldName); // LOG
-
     })
     .catch(err=>{
       console.log(err); // LOG

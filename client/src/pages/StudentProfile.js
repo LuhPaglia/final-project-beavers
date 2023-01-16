@@ -1,8 +1,8 @@
-const Student = () => {
-  return (
-    
-    <div>student</div>
+const StudentProfile = () => {
+  
+  return(
+  <></>
   )
 }
 
-export default Student;
+export default StudentProfile;
