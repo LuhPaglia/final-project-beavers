@@ -21,10 +21,6 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
 
     const formData = new FormData(e.target);
 
-    // Validate username
-    if (formData.get('user_name').length < 4)
-      return alert("Username must be at least 4 characters long.");
-
     if (!edit) {
       // ADD user
       switch (role) {
@@ -89,6 +85,14 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
     [4, "JavaScript for Web Developers 2", null],
     [5, "Introduction to Back-End Web Development: PHP", null],
     [6, "Introduction to Content Management Systems with WordPress", null],
+  ];
+
+  const evaluation = [
+    [1, "Participation"],
+    [2, "CourseWork"],
+    [3, "Mid-Course Exam"],
+    [4, "Final Project"],
+    [5, "Final Exam"],
   ];
 
   return (
@@ -164,6 +168,27 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
             )}
 
             {role == "grade" && (
+              <FloatingLabel controlId="Evaluation" label="Evaluation">
+                <Form.Select
+                  name="evaluation"
+                  aria-label="Floating label select example"
+                >
+                  <option value="">Select Evaluation</option>
+                  {evaluation.map((evaluation) => (
+                    <option
+                      key={evaluation[0]}
+                      value={evaluation[1]}
+                      defaultValue={prev?.evaluation}
+                    >
+                      {evaluation[1]}
+                    </option>
+                  ))}
+                </Form.Select>
+              </FloatingLabel>
+            )}
+
+
+            {role == "grade" && (
               <FloatingLabel
                 controlId="Student ID"
                 label="Student ID"
@@ -201,7 +226,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
                   <option value="">Select Course Name</option>
                   {course.map((course) => (
                     <option key={course[0]} value={course[0]}
-                    defaultValue ={(prev!=null)?prev.course_id:null}>
+                    defaultValue ={prev?.course_id}>
                       {course[1]}
                     </option>
                   ))}
@@ -299,6 +324,17 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
                   type="number"
                   placeholder="Mark"
                   defaultValue ={prev?.mark}
+                />
+              </FloatingLabel>
+            )}
+
+            {role == "grade" && (
+              <FloatingLabel controlId="Mark Max" label="Mark Max" className="mb-3">
+                <Form.Control
+                  name="mark_max"
+                  type="number"
+                  placeholder="mark_max"
+                  defaultValue={prev?.mark_max}
                 />
               </FloatingLabel>
             )}
