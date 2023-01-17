@@ -68,10 +68,12 @@ CREATE TABLE `beavers`.`student_tb` (
 CREATE TABLE `beavers`.`grade_tb` (
   `grade_id` INT NOT NULL AUTO_INCREMENT,
   `classwork` VARCHAR(100) NOT NULL,
+  `evaluation` VARCHAR(100) NOT NULL,
   `student_id` INT NOT NULL,
   `teacher_id` INT NOT NULL,
   `course_id` INT NOT NULL,
   `mark` INT NOT NULL,
+  `mark_max` INT NOT NULL,
   `mark_date` DATE NOT NULL,
   `feedback` VARCHAR(255) NULL,
   `status` BOOLEAN NOT NULL DEFAULT TRUE,
@@ -95,8 +97,6 @@ CREATE TABLE `beavers`.`grade_tb` (
     REFERENCES `beavers`.`course_tb` (`course_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
-
 
 
 
