@@ -5,10 +5,10 @@
     // header("Content-Type: application/json; charset=UTF-8");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     
-    $baseName = "http://localhost:8888/course-06/final-project-beavers/server/";
+    $baseName = "http://localhost/final-project-beavers/server/services/";
     $hostName = "localhost";
     $userName = "root";
-    $password = "root";
+    $password = "";
     $dbName = "beavers";  
     if(!isset($_SESSION)) 
     { 

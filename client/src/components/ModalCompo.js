@@ -3,19 +3,22 @@ import axiosSrv from "../Services/axiosSrv";
 
 import { Button, Form, FloatingLabel, Modal } from "react-bootstrap";
 
-const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
-  const resultLoad = (pageName, data) => {
-    axiosSrv
-      .post(pageName, data)
-      .then((res) => {
-        console.log(res.data);
-        load(); // LOG - data insert
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
 
+  const resultLoad = (pageName, data) => {
+    axiosSrv.post(pageName,data)
+    .then(res=>{
+      console.log(res.data);
+      if (res.data=="0"||res.data=="-1") {
+        alert("Fail to update dashboard")
+      }
+      load(); // LOG - data insert
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+  
   const handleSubmit = (e) => {
     e.preventDefault(); // Blocking default action which occurs page moving when the form is submitted.
 
@@ -25,19 +28,19 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
       // ADD user
       switch (role) {
         case "admin":
-          resultLoad("admin/adminUserAdd.php", formData);
-          break;
+          resultLoad("admin/adminUserAdd.php",formData);
+        break;
         case "course":
-          resultLoad("course/courseAdd.php", formData);
-          break;
+          resultLoad("course/courseAdd.php",formData);
+        break;
         case "teacher":
-          resultLoad("teacher/teacherAdd.php", formData);
-          break;
+          resultLoad("teacher/teacherAdd.php",formData);
+        break;
         case "student":
-          resultLoad("student/studentAdd.php", formData);
-          break;
+          resultLoad("student/studentAdd.php",formData);
+        break;
         case "grade":
-          resultLoad("grade/gradeAdd.php", formData);
+          resultLoad("grade/gradeAdd.php",formData);
           break;
 
         default:
@@ -45,24 +48,25 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
       }
       onClose(); // after add, close modal automatically
     } else {
+
       // Edit user / pass teacher id info
-      formData.append("teacher_id", prev.teacher_id);
+      formData.append('id', prev[Object.keys(prev)[0]])
 
       switch (role) {
         case "admin":
-          resultLoad("teacherEdit.php", formData);
-          break;
+          resultLoad("admin/adminUserEdit.php",formData);
+        break;
         case "course":
-          resultLoad("teacherEdit.php", formData);
-          break;
+          resultLoad("course/courseEdit.php",formData);
+        break;
         case "teacher":
-          resultLoad("teacher/teacherEdit.php", formData);
-          break;
+          resultLoad("teacher/teacherEdit.php",formData);
+        break;
         case "student":
-          resultLoad("teacherEdit.php", formData);
-          break;
+          resultLoad("student/studentEdit.php",formData);
+        break;
         case "grade":
-          resultLoad("teacherEdit.php", formData);
+          resultLoad("grade/gradeEdit.php",formData);
           break;
 
         default:
@@ -70,6 +74,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
       }
       onClose(); // after edit, close modal automatically
     }
+
   };
 
   const course = [
@@ -108,7 +113,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
         </Modal.Header>
 
         <Form onSubmit={handleSubmit}>
-          <Modal.Body>
+        <Modal.Body>    
             {role != "course" && role != "grade" && (
               <FloatingLabel
                 controlId="Email address"
@@ -119,7 +124,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="email"
                   type="email"
                   placeholder="name@example.com"
-                  defaultValue={prev?.email}
+                  defaultValue ={prev?.email}
                 />
               </FloatingLabel>
             )}
@@ -134,7 +139,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="user_name"
                   type="text"
                   placeholder="Username"
-                  defaultValue={prev?.user_name}
+                  defaultValue ={prev?.user_name}
                 />
               </FloatingLabel>
             )}
@@ -160,7 +165,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="classwork"
                   type="text"
                   placeholder="Classwork Name"
-                  defaultValue={prev?.classwork}
+                  defaultValue ={prev?.classwork}
                 />
               </FloatingLabel>
             )}
@@ -185,6 +190,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
               </FloatingLabel>
             )}
 
+
             {role == "grade" && (
               <FloatingLabel
                 controlId="Student ID"
@@ -195,23 +201,23 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="student_id"
                   type="number"
                   placeholder="Student ID"
-                  defaultValue={prev?.student_id}
+                  defaultValue ={prev?.student_id}
                 />
               </FloatingLabel>
             )}
 
-            {!edit && role == "student" && (
-              <FloatingLabel
-                controlId="profile_pic"
-                label="profile_pic"
-                className="mb-3"
-              >
-                <Form.Control
-                  name="profile_pic"
-                  type="file"
-                  placeholder="Select profile"
-                />
-              </FloatingLabel>
+          {!edit && role == "student" && (
+            <FloatingLabel
+            controlId="profile_pic"
+            label="profile_pic"
+            className="mb-3"
+            >
+            <Form.Control
+              name="profile_pic"
+              type="file"
+              placeholder="Select profile"
+            />
+            </FloatingLabel>
             )}
 
             {(role == "teacher" || role == "student" || role == "grade") && (
@@ -222,11 +228,8 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                 >
                   <option value="">Select Course Name</option>
                   {course.map((course) => (
-                    <option
-                      key={course[0]}
-                      value={course[0]}
-                      defaultValue={prev != null ? prev.course_id : null}
-                    >
+                    <option key={course[0]} value={course[0]}
+                    defaultValue ={prev?.course_id}>
                       {course[1]}
                     </option>
                   ))}
@@ -244,7 +247,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="teacher_id"
                   type="number"
                   placeholder="Teacher ID"
-                  defaultValue={prev?.teacher_id}
+                  defaultValue ={prev?.teacher_id}
                 />
               </FloatingLabel>
             )}
@@ -255,7 +258,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="salary"
                   type="number"
                   placeholder="Salary"
-                  defaultValue={prev?.salary}
+                  defaultValue ={prev?.salary}
                 />
               </FloatingLabel>
             )}
@@ -270,7 +273,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="address"
                   type="text"
                   placeholder="Address"
-                  defaultValue={prev?.address}
+                  defaultValue ={prev?.address}
                 />
               </FloatingLabel>
             )}
@@ -285,7 +288,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="birthday"
                   type="date"
                   placeholder="Birthday"
-                  defaultValue={prev?.birthday}
+                  defaultValue ={prev?.birthday}
                 />
               </FloatingLabel>
             )}
@@ -300,7 +303,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="course_name"
                   type="text"
                   placeholder="Course Name"
-                  defaultValue={prev?.course_name}
+                  defaultValue ={prev?.course_name}
                 />
               </FloatingLabel>
             )}
@@ -312,7 +315,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="description"
                   placeholder="Description"
                   style={{ height: "100px" }}
-                  defaultValue={prev?.description}
+                  defaultValue ={prev?.description}
                 />
               </FloatingLabel>
             )}
@@ -323,7 +326,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="mark"
                   type="number"
                   placeholder="Mark"
-                  defaultValue={prev?.mark}
+                  defaultValue ={prev?.mark}
                 />
               </FloatingLabel>
             )}
@@ -345,7 +348,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="mark_date"
                   type="date"
                   placeholder="mark_date"
-                  defaultValue={prev?.date}
+                  defaultValue={prev?.mark_date}
                 />
               </FloatingLabel>
             )}
@@ -357,19 +360,20 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev = null }) => {
                   name="feedback"
                   placeholder="Feedback"
                   style={{ height: "100px" }}
-                  defaultValue={prev?.feedback}
+                  defaultValue ={prev?.feedback}
                 />
               </FloatingLabel>
             )}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={onClose}>
-              Close
-            </Button>
-            <Button type="submit" variant="success">
-              Save Changes
-            </Button>
-          </Modal.Footer>
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onClose}>
+            Close
+          </Button>
+          <Button type="submit" variant="success">
+            Save Changes
+          </Button>
+        </Modal.Footer>
         </Form>
       </Modal>
     </>

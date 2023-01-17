@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import axiosSrv from "../Services/axiosSrv";
-
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
+
+import axiosSrv from "../Services/axiosSrv";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 
