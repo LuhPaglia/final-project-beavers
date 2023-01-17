@@ -9,12 +9,9 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
     axiosSrv.post(pageName,data)
     .then(res=>{
       console.log(res.data);
-<<<<<<< HEAD
       if (res.data=="0"||res.data=="-1") {
         alert("Fail to update dashboard")
       }
-=======
->>>>>>> 42be27ac10addf7b419154493e4062b6f314e3d4
       load(); // LOG - data insert
     })
     .catch((error) => {
