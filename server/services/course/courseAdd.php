@@ -21,7 +21,5 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     }
     header("Location: adminPage.php?msg=2");
     exit();
-
 }
-
 ?>
