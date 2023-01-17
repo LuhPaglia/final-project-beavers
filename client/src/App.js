@@ -11,6 +11,7 @@ import Grade from "./pages/Grade";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./App.css";
+import Logout from "./pages/Logout";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
             <Route path="/teacher" element={<Teacher />} />
             <Route path="/students" element={<Students />} />
             <Route path="/grade" element={<Grade />} />
-            <Route path="/students/:id" element={<StudentProfile />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/studentProfile" element={<StudentProfile />} />
           </Route>
         </Routes>
       </div>

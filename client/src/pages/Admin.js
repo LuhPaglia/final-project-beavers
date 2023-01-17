@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
 import {StyledAdmin} from "../styles";
+import axiosSrv from "../Services/axiosSrv";
 
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button} from "react-bootstrap";
 
 const Admin = () => {
   const [showAdmin, setShowAdmin] = useState(false);
   const [showCourse, setShowCourse] = useState(false);
+
+  const [dataAdmin,setDataAdmin] = useState();
+  const [fieldsAdmin,setFieldsAdmin] = useState();
+  const [dataCourse,setDataCourse] = useState();
+  const [fieldsCourse,setFieldsCourse] = useState();
+
 
   const handleCloseAdmin = () => setShowAdmin(false);
   const handleShowAdmin = () => setShowAdmin(true);
@@ -18,16 +25,21 @@ const Admin = () => {
   const admin = "admin";
   const course = "course";
 
+  const deleteAdmin = 'admin/adminDelete.php';
+  const deleteCourse = 'admin/courseDelete.php';
+
+
   const adminTh = [
     "Admin ID",
     "Username",
     "Email",
-    "Profile URL",
     "Birthday",
     "Address",
+    "Edit",
+    "Delete"
   ];
 
-  const courseTh = ["Course ID", "Course Name", "Description"];
+  const courseTh = ["Course ID", "Course Name", "Description","Edit","Delete"];
 
   const adminTr = [
     [
@@ -64,6 +76,47 @@ const Admin = () => {
     rowGap: '5vh'
   }
 
+  const loadAdmins = () => {
+    let dataTr = [];
+    let fieldName = [];
+
+    axiosSrv.get('admin/adminSelect.php')
+    .then(res=>{
+      res.data.forEach(obj => {
+        dataTr.push(Object.values(obj));
+      });
+      fieldName =Object.keys(res.data[0]);
+
+      setDataAdmin(dataTr);
+      setFieldsAdmin(fieldName);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
+  const loadCourses = () => {
+    let dataTr = [];
+    let fieldName = [];
+
+    axiosSrv.get('admin/courseSelect.php')
+    .then(res=>{
+      res.data.forEach(obj => {
+        dataTr.push(Object.values(obj));
+      });
+      fieldName =Object.keys(res.data[0]);
+
+      setDataCourse(dataTr);
+      setFieldsCourse(fieldName);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
+  useEffect(()=>{
+    loadAdmins();
+    loadCourses();
+  },[]);
+
   return (
     <div className='page'>
       <StyledAdmin>
@@ -84,7 +137,7 @@ const Admin = () => {
             </Row>  
 
             <Row>
-              <Dashboard role={admin} th={adminTh} tr={adminTr} />
+            <Dashboard data={dataAdmin} fields={fieldsAdmin} role={admin} th={adminTh} load={loadAdmins} deletePage={deleteAdmin} />
           </Row>
           </Col>
         </Row>
@@ -103,7 +156,7 @@ const Admin = () => {
             </Row>
 
             <Row>
-              <Dashboard role={course} th={courseTh} tr={courseTr} />
+              <Dashboard data={dataCourse} fields={fieldsCourse} role={course} th={courseTh} load={loadCourses} deletePage={deleteCourse} />
             </Row>
             </Col>
           </Row>
