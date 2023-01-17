@@ -31,7 +31,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
           resultLoad("admin/adminUserAdd.php",formData);
         break;
         case "course":
-          resultLoad("course/courseAdd.php",formData);
+          resultLoad("admin/courseAdd.php",formData);
         break;
         case "teacher":
           resultLoad("teacher/teacherAdd.php",formData);
@@ -57,7 +57,7 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
           resultLoad("admin/adminUserEdit.php",formData);
         break;
         case "course":
-          resultLoad("course/courseEdit.php",formData);
+          resultLoad("admin/courseEdit.php",formData);
         break;
         case "teacher":
           resultLoad("teacher/teacherEdit.php",formData);

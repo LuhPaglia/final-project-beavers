@@ -80,7 +80,7 @@ const Dashboard = ({ role, th, data, fields, load, deletePage }) => {
                     <td key={index}>{element}</td>
                   )
                 )}
-                {role != "admin" && role != "course" && (
+                { (
                   // each btn value == tr row index
                   <>
                     <td>
