@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Dashboard from "../components/Dashboard";
 import ModalCompo from "../components/ModalCompo";
+
 import {StyledTeacher} from "../styles";
 import axiosSrv from "../Services/axiosSrv";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { Prev } from "react-bootstrap/esm/PageItem";
 
 const Teacher = () => {
   const [show, setShow] = useState(false);
@@ -60,7 +60,7 @@ const Teacher = () => {
   },[]);
   
   return (
-    <>
+    <div className="page">
       <Container>
         <Row>
           <Col>
@@ -77,7 +77,7 @@ const Teacher = () => {
         </Row>
       </Container>
       {show && <ModalCompo role={teacher} show={show} onClose={handleClose} load={load} />}
-    </>
+    </div>
   );
 };
 

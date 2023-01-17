@@ -32,14 +32,10 @@ const Dashboard = ({ role, th, data, fields, load, deletePage }) => {
   const deleteRow = (e) => {
     let selectedId = e.target.value;
 
-    // selected previous value as json object
-    let delVal = {};
-    fields.forEach((th, idx) => {
-      delVal[th] = data[selectedId][idx];
-    });
-
-    console.log(delVal);  // LOG
-    setDel(delVal);
+    // selected delete item ID
+    let id = data[selectedId][0];
+    console.log(id);  // LOG
+    setDel(id);
   };
 
   useEffect(()=>{
@@ -49,7 +45,7 @@ const Dashboard = ({ role, th, data, fields, load, deletePage }) => {
   useEffect(()=>{
     if (del!=null) {
       const formData = new FormData()
-      formData.append('id', del[Object.keys(del)[0]])
+      formData.append('id', del)
   
       axiosSrv.post(deletePage,formData)
       .then((res)=>{
@@ -93,7 +89,7 @@ const Dashboard = ({ role, th, data, fields, load, deletePage }) => {
                       </Button>
                     </td>
                     <td>
-                    <Button variant="success" onClick={deleteRow} value={idx}>
+                    <Button variant="success" onClick={(e)=>{alert("Are you sure to delete a user?"); deleteRow(e);}} value={idx}>
                       Delete
                     </Button>
                     </td>
