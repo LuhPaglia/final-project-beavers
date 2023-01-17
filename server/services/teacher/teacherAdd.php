@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     $newTeacher = new teacherObj(null,$user_name,$password,$email,$course_id,$salary,$address,$birthday);
     $valuesArray = $newTeacher->toInsert();
     $fieldArray = ["user_name","password","email","course_id","salary","address", "birthday"];
-    print_r($valuesArray); // LOG
 
     if($dbSrv->dbConnect()){
         if($dbSrv->insert('teacher_tb',$valuesArray,$fieldArray)){

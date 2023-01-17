@@ -5,6 +5,7 @@ import { FaAdn, FaChalkboardTeacher, FaGlassCheers, FaGraduationCap, FaMagic, Fa
 import { StyledLogin } from '../styles.js';
 import axiosSrv from '../Services/axiosSrv.js';
 import cryptoJs from "crypto-js";
+import { Link } from 'react-router-dom';
 
 
 const Login = () => {
@@ -34,12 +35,25 @@ const Login = () => {
     e.preventDefault();
     sessionStorage.clear();
     const formData = new FormData(e.target);
-    console.log(formData.get("role"));
     axiosSrv.post("login/login.php",formData)
     .then(res=>{
       console.log(res);
       if(res.data !== "User not found"){
         sessionStorage.setItem("userLogged", enc(res.data.toString(), "w3L0v3pHp"));
+        sessionStorage.setItem("userType", formData.get("role"));
+        switch(formData.get("role")){
+          case "admin":
+            window.location.href = 'admin';
+            break;
+          case "teacher":
+            window.location.href = 'teacher';
+            break;
+          case "student":
+            window.location.href = 'studentProfile';
+            break;
+          default:
+            window.location.href = '';
+        }
       }else{
         console.log(res.data);
       }
@@ -100,7 +114,7 @@ return (
           </Form.Group>
         </fieldset>
       </Form>
-      <p>Not a member? <a href="#">Join Us!</a></p>
+      <p>Not a member? <Link to="#">Join Us!</Link></p>
     </Container>
   </StyledLogin>
 )
