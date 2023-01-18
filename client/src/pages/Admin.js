@@ -97,14 +97,12 @@ const Admin = () => {
   const loadCourses = () => {
     let dataTr = [];
     let fieldName = [];
-
     axiosSrv.get('admin/courseSelect.php')
     .then(res=>{
       res.data.forEach(obj => {
         dataTr.push(Object.values(obj));
       });
       fieldName =Object.keys(res.data[0]);
-
       setDataCourse(dataTr);
       setFieldsCourse(fieldName);
     })
@@ -164,8 +162,8 @@ const Admin = () => {
         </Row>
       </Container>
       </StyledAdmin>
-      {showAdmin && <ModalCompo role={admin} show={showAdmin} onClose={handleCloseAdmin} />}
-      {showCourse && <ModalCompo role={course} show={showCourse} onClose={handleCloseCoourse} />}
+      {showAdmin && <ModalCompo role={admin} show={showAdmin} onClose={handleCloseAdmin} load={loadAdmins} />}
+      {showCourse && <ModalCompo role={course} show={showCourse} onClose={handleCloseCoourse} load={loadCourses} />}
     </div>
   );
 };
