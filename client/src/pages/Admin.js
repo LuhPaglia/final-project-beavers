@@ -82,13 +82,17 @@ const Admin = () => {
 
     axiosSrv.get('admin/adminSelect.php')
     .then(res=>{
-      res.data.forEach(obj => {
-        dataTr.push(Object.values(obj));
-      });
-      fieldName =Object.keys(res.data[0]);
+      if (res.data.length==0) {
+        setData(null);
+      } else {
+        res.data.forEach(obj => {
+          dataTr.push(Object.values(obj));
+        });
+        fieldName =Object.keys(res.data[0]);
 
-      setDataAdmin(dataTr);
-      setFieldsAdmin(fieldName);
+        setDataAdmin(dataTr);
+        setFieldsAdmin(fieldName);
+      }
     })
     .catch(err=>{
       console.log(err);
