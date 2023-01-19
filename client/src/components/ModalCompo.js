@@ -4,6 +4,24 @@ import axiosSrv from "../Services/axiosSrv";
 import { Button, Form, FloatingLabel, Modal } from "react-bootstrap";
 
 const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
+  const [course, setCourse] = useState([]);
+
+  // let course = [];
+
+  useEffect(()=>{
+    let tempArray = [];
+    axiosSrv.get('admin/courseSelect.php')
+    .then(res=>{
+      res.data.forEach(obj => {
+        tempArray.push([obj['course_id'],obj['description'],null])
+      });
+      setCourse(tempArray);
+      console.log(course);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  },[]);
 
   const resultLoad = (pageName, data) => {
     axiosSrv.post(pageName,data)
@@ -76,19 +94,6 @@ const ModalCompo = ({ edit, role, show, onClose, load, prev=null}) => {
     }
 
   };
-
-  const course = [
-    [1, "Fundamentals of Front End Web Development and HTML", null],
-    [
-      2,
-      "Fundamentals of CSS, Preprocessors, Frameworks, & Version Control Systems",
-      null,
-    ],
-    [3, "JavaScript for Web Developers 1", null],
-    [4, "JavaScript for Web Developers 2", null],
-    [5, "Introduction to Back-End Web Development: PHP", null],
-    [6, "Introduction to Content Management Systems with WordPress", null],
-  ];
 
   const evaluation = [
     [1, "Participation"],
