@@ -1,10 +1,56 @@
+import { useState, useEffect } from "react";
+import cryptoJs from "crypto-js";
+import axiosSrv from "../Services/axiosSrv";
+
 import { Container, Row, Col, Tab, ListGroup } from "react-bootstrap";
 
+import StudentCompo from "../components/StudentCompo";
 import Classworks from "../components/Classworks";
-
 import { StyledStudentProfile } from "../styles";
 
 const Student = () => {
+  const [studentID, setStudentID] = useState(0);
+  const [select, setSelect] = useState([]);
+  const [grade, setGrade] = useState([]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("userLogged") != null) {
+      setStudentID(dec(sessionStorage.getItem("userLogged"), "w3L0v3pHp"));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (studentID != null) {
+      const formData = new FormData();
+      formData.append("student_id", studentID);
+
+      axiosSrv
+        .post("studentProfile/studentGrade.php", formData)
+        .then((res) => {
+          console.log(res.data, "get grade data"); //LOG
+          setGrade(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      axiosSrv
+        .post("studentProfile/studentSelect.php", formData)
+        .then((res) => {
+          console.log(res.data);
+          setSelect(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [studentID]);
+
+  const dec = (encData, key) => {
+    const decData = cryptoJs.AES.decrypt(encData, key);
+    return decData.toString(cryptoJs.enc.Utf8);
+  };
+
   return (
     <div className="page">
       <StyledStudentProfile>
@@ -13,38 +59,17 @@ const Student = () => {
             <Row>
               <Col sm={4}>
                 <ListGroup>
-                  <ListGroup.Item action href="#link1">
-                    Fundamentals of Front End Web Development and HTML
-                  </ListGroup.Item>
-                  <ListGroup.Item action href="#link2">
-                    Fundamentals of CSS, Preprocessors, Frameworks, & Version
-                    Control Systems
-                  </ListGroup.Item>
-                  <ListGroup.Item action href="#link3">
-                    JavaScript for Web Developers 1
-                  </ListGroup.Item>
-                  <ListGroup.Item action href="#link4">
-                    JavaScript for Web Developers 2
-                  </ListGroup.Item>
-                  <ListGroup.Item action href="#link5">
-                    Introduction to Back-End Web Development: PHP
-                  </ListGroup.Item>
-                  <ListGroup.Item action href="#link6">
-                    Introduction to Content Management Systems with WordPress
-                  </ListGroup.Item>
+                  <StudentCompo select={select} />
                 </ListGroup>
               </Col>
               <Col sm={8}>
-                <Tab.Content>
-                  <Tab.Pane eventKey="#link1">
-                    <Classworks />
+                <Classworks grade={grade} stdName={select}/>
+
+                {/* <Tab.Content eve>
+                  <Tab.Pane>
+                    <Classworks grade={grade} />
                   </Tab.Pane>
-                  <Tab.Pane eventKey="#link2">Not enrolled yet</Tab.Pane>
-                  <Tab.Pane eventKey="#link3">Not enrolled yet</Tab.Pane>
-                  <Tab.Pane eventKey="#link4">Not enrolled yet</Tab.Pane>
-                  <Tab.Pane eventKey="#link5">Not enrolled yet</Tab.Pane>
-                  <Tab.Pane eventKey="#link6">Not enrolled yet</Tab.Pane>
-                </Tab.Content>
+                </Tab.Content> */}
               </Col>
             </Row>
           </Tab.Container>

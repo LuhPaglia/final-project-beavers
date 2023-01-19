@@ -4,10 +4,10 @@
     header("Access-Control-Allow-Methods: POST");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     
-    $baseName = "http://localhost/PHP/final-project-beavers/server/services/";
-    $hostName = "localhost:3306";
+    $baseName = "http://localhost/final-project-beavers/server/services/";
+    $hostName = "localhost";
     $userName = "root";
-    $password = "root1234";
+    $password = "";
     $dbName = "beavers";  
     if(!isset($_SESSION)) 
     { 

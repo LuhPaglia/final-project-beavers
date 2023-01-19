@@ -46,7 +46,7 @@ const Login = () => {
             window.location.href = 'admin';
             break;
           case "teacher":
-            window.location.href = 'teacher';
+            window.location.href = 'students';
             break;
           case "student":
             window.location.href = 'studentProfile';
