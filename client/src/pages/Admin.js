@@ -82,13 +82,17 @@ const Admin = () => {
 
     axiosSrv.get('admin/adminSelect.php')
     .then(res=>{
-      res.data.forEach(obj => {
-        dataTr.push(Object.values(obj));
-      });
-      fieldName =Object.keys(res.data[0]);
+      if (res.data.length==0) {
+        setDataAdmin(null);
+      } else {
+        res.data.forEach(obj => {
+          dataTr.push(Object.values(obj));
+        });
+        fieldName =Object.keys(res.data[0]);
 
-      setDataAdmin(dataTr);
-      setFieldsAdmin(fieldName);
+        setDataAdmin(dataTr);
+        setFieldsAdmin(fieldName);
+      }
     })
     .catch(err=>{
       console.log(err);
@@ -99,12 +103,16 @@ const Admin = () => {
     let fieldName = [];
     axiosSrv.get('admin/courseSelect.php')
     .then(res=>{
-      res.data.forEach(obj => {
-        dataTr.push(Object.values(obj));
-      });
-      fieldName =Object.keys(res.data[0]);
-      setDataCourse(dataTr);
-      setFieldsCourse(fieldName);
+      if (res.data.length==0) {
+        setDataCourse(null);
+      } else {
+        res.data.forEach(obj => {
+          dataTr.push(Object.values(obj));
+        });
+        fieldName =Object.keys(res.data[0]);
+        setDataCourse(dataTr);
+        setFieldsCourse(fieldName);
+      }
     })
     .catch(err=>{
       console.log(err);

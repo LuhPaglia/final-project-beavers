@@ -42,15 +42,18 @@ const Grade = () => {
     .then(res=>{
       console.log(res.data, "load"); // LOG
 
-      res.data.forEach(obj => {
-        dataTr.push(Object.values(obj))
-      });
-      fieldName =Object.keys(res.data[0]);
+      if (res.data.length==0) {
+        setData(null);
+      } else {
+        res.data.forEach(obj => {
+          dataTr.push(Object.values(obj))
+        });
+        fieldName =Object.keys(res.data[0]);
 
-      setData(dataTr);
-      setFields(fieldName);
-      console.log(fieldName); // LOG
-
+        setData(dataTr);
+        setFields(fieldName);
+        console.log(fieldName); // LOG
+      }
     })
     .catch(err=>{
       console.log(err); // LOG

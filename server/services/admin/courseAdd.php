@@ -18,8 +18,9 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
             echo "0";
         }
     } else{
-        echo "DB connection problem";
+        echo "-1";
     }
+    $dbSrv->closeDb();
 }
 
 ?>
