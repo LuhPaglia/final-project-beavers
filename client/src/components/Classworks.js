@@ -6,7 +6,7 @@ import { StyledClassworks } from "../styles";
 // feednack: accrdion
 // mock data를 배열로 만들어서, map으로 돌리기 => 나중에 백엔드에서 data오면 받기 쉽게 미리 준비
 // gradeAdd -> gradeEdit
-const Classworks = ({ data }) => {
+const Classworks = ({ grade }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(()=>{
@@ -25,7 +25,7 @@ const Classworks = ({ data }) => {
     let finalexam = 0;
     let finalexamMax = 0;
 
-    data.forEach(({ evaluation, mark, mark_max })=>{
+    grade.forEach(({ evaluation, mark, mark_max })=>{
       if(evaluation == "CourseWork") {
         coursework += parseFloat(mark);
         courseworkMax += parseFloat(mark_max);
@@ -50,7 +50,7 @@ const Classworks = ({ data }) => {
     let calTotal = (coursework/courseworkMax) * 0.2 + finalproject/finalprojectMax * 0.3 + midcourse/midcourseMax * 0.15 + finalexam/finalexamMax * 0.25 + participation/participationMax * 0.1;
     calTotal = calTotal * 100
     setTotal(calTotal);
-  }, [])
+  })
   return (
     <StyledClassworks>
       <Container>
@@ -78,7 +78,7 @@ const Classworks = ({ data }) => {
         </Row>
         <Row>
               <Accordion defaultActiveKey="0">
-                {data.map(
+              {grade.map(
                   ({ classwork, mark_date, evaluation, mark, mark_max, feedback }, index) => (
                     <Accordion.Item eventKey={index}>
                       <Accordion.Header>
@@ -102,117 +102,117 @@ const Classworks = ({ data }) => {
 
 export default Classworks;
 
-// const data = [
-//   {
-//     grade_id: 1,
-//     classwork: "Participation",
-//     evaluation: "Participation",
-//     student_id: 2,
-//     teacher_id: 3,
-//     course_id: 4,
-//     mark: 100,
-//     mark_max: 100,
-//     mark_date: "기한 없음",
-//     feedback:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     status: 1,
-//   },
-//   {
-//     grade_id: 2,
-//     classwork: "FINAL EXAM",
-//     evaluation: "Final Exam",
-//     student_id: 2,
-//     teacher_id: 3,
-//     course_id: 4,
-//     mark: 94,
-//     mark_max: 100,
-//     mark_date: "2022. 12. 22. 오후 7:00",
-//     feedback:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     status: 1,
-//   },
-//   {
-//     grade_id: 3,
-//     classwork: "Final Project Submission",
-//     evaluation: "Final Project",
-//     student_id: 2,
-//     teacher_id: 3,
-//     course_id: 4,
-//     mark: 80,
-//     mark_max: 80,
-//     mark_date: "2022. 12. 25. 오후 11:59",
-//     feedback:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     status: 1,
-//   },
-//   {
-//     grade_id: 4,
-//     classwork: "CourseWork#3",
-//     evaluation: "CourseWork",
-//     student_id: 2,
-//     teacher_id: 3,
-//     course_id: 4,
-//     mark: 100,
-//     mark_max: 100,
-//     mark_date: "2022. 12. 19. 오후 11:59",
-//     feedback:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     status: 1,
-//   },
-//   {
-//     grade_id: 5,
-//     classwork: "Midcourse Exam",
-//     evaluation: "Mid-Course Exam",
-//     student_id: 2,
-//     teacher_id: 3,
-//     course_id: 4,
-//     mark: 87,
-//     mark_max: 100,
-//     mark_date: "기한 없음",
-//     feedback:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     status: 1,
-//   },
-//   {
-//     grade_id: 6,
-//     classwork: "CourseWork#2",
-//     evaluation: "CourseWork",
-//     student_id: 2,
-//     teacher_id: 3,
-//     course_id: 4,
-//     mark: 90,
-//     mark_max: 100,
-//     mark_date: "2022. 12. 12. 오후 4:00",
-//     feedback:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     status: 1,
-//   },
-//   {
-//     grade_id: 7,
-//     classwork: "CourseWork#1",
-//     evaluation: "CourseWork",
-//     student_id: 2,
-//     teacher_id: 3,
-//     course_id: 4,
-//     mark: 100,
-//     mark_max: 100,
-//     mark_date: "2022. 12. 5. 오후 4:00",
-//     feedback:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     status: 1,
-//   },
-//   {
-//     grade_id: 8,
-//     classwork: "Final Project Proposal",
-//     evaluation: "Final Project",
-//     student_id: 2,
-//     teacher_id: 3,
-//     course_id: 4,
-//     mark: 19,
-//     mark_max: 20,
-//     mark_date: "2022. 12. 8. 오후 4:00",
-//     feedback:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     status: 1,
-//   },
-// ];
+const data = [
+  {
+    grade_id: 1,
+    classwork: "Participation",
+    evaluation: "Participation",
+    student_id: 2,
+    teacher_id: 3,
+    course_id: 4,
+    mark: 100,
+    mark_max: 100,
+    mark_date: "기한 없음",
+    feedback:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    status: 1,
+  },
+  {
+    grade_id: 2,
+    classwork: "FINAL EXAM",
+    evaluation: "Final Exam",
+    student_id: 2,
+    teacher_id: 3,
+    course_id: 4,
+    mark: 94,
+    mark_max: 100,
+    mark_date: "2022. 12. 22. 오후 7:00",
+    feedback:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    status: 1,
+  },
+  {
+    grade_id: 3,
+    classwork: "Final Project Submission",
+    evaluation: "Final Project",
+    student_id: 2,
+    teacher_id: 3,
+    course_id: 4,
+    mark: 80,
+    mark_max: 80,
+    mark_date: "2022. 12. 25. 오후 11:59",
+    feedback:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    status: 1,
+  },
+  {
+    grade_id: 4,
+    classwork: "CourseWork#3",
+    evaluation: "CourseWork",
+    student_id: 2,
+    teacher_id: 3,
+    course_id: 4,
+    mark: 100,
+    mark_max: 100,
+    mark_date: "2022. 12. 19. 오후 11:59",
+    feedback:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    status: 1,
+  },
+  {
+    grade_id: 5,
+    classwork: "Midcourse Exam",
+    evaluation: "Mid-Course Exam",
+    student_id: 2,
+    teacher_id: 3,
+    course_id: 4,
+    mark: 87,
+    mark_max: 100,
+    mark_date: "기한 없음",
+    feedback:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    status: 1,
+  },
+  {
+    grade_id: 6,
+    classwork: "CourseWork#2",
+    evaluation: "CourseWork",
+    student_id: 2,
+    teacher_id: 3,
+    course_id: 4,
+    mark: 90,
+    mark_max: 100,
+    mark_date: "2022. 12. 12. 오후 4:00",
+    feedback:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    status: 1,
+  },
+  {
+    grade_id: 7,
+    classwork: "CourseWork#1",
+    evaluation: "CourseWork",
+    student_id: 2,
+    teacher_id: 3,
+    course_id: 4,
+    mark: 100,
+    mark_max: 100,
+    mark_date: "2022. 12. 5. 오후 4:00",
+    feedback:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    status: 1,
+  },
+  {
+    grade_id: 8,
+    classwork: "Final Project Proposal",
+    evaluation: "Final Project",
+    student_id: 2,
+    teacher_id: 3,
+    course_id: 4,
+    mark: 19,
+    mark_max: 20,
+    mark_date: "2022. 12. 8. 오후 4:00",
+    feedback:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    status: 1,
+  },
+];

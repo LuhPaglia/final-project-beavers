@@ -27,7 +27,7 @@ const Student = () => {
       axiosSrv
         .post("studentProfile/studentGrade.php", formData)
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data, "get grade data"); //LOG
           setGrade(res.data);
         })
         .catch((err) => {
@@ -44,9 +44,7 @@ const Student = () => {
           console.log(err);
         });
     }
-  }, []);
-
-
+  }, [studentID]);
 
   const dec = (encData, key) => {
     const decData = cryptoJs.AES.decrypt(encData, key);
@@ -61,15 +59,17 @@ const Student = () => {
             <Row>
               <Col sm={4}>
                 <ListGroup>
-                <StudentCompo select={select} />
+                  <StudentCompo select={select} />
                 </ListGroup>
               </Col>
               <Col sm={8}>
-                <Tab.Content>
-                    <Tab.Pane>
-                      {/* <Classworks grade={grade} /> */}
-                    </Tab.Pane>
-                </Tab.Content>
+                <Classworks grade={grade} />
+
+                {/* <Tab.Content eve>
+                  <Tab.Pane>
+                    <Classworks grade={grade} />
+                  </Tab.Pane>
+                </Tab.Content> */}
               </Col>
             </Row>
           </Tab.Container>
