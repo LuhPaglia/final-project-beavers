@@ -10,22 +10,13 @@ const StudentCompo = ({ select }) => {
           <Card.Body>
             <Card.Title>{value.user_name}</Card.Title>
             <Card.Text>
-              {value.address}
-              <br />
-              {value.birthday}
-              <br />
-              {value.course_id}
-              <br />
-              {value.email}
-              <br />
-              {value.student_id}
-              <br />
-              {value.teacher_id}
-              <br />
-              {value.user_name}
-              <br />
+              <p><b>Student ID: </b>{value.student_id}</p>
+              <p><b>Course ID: </b>{value.course_id}</p>
+              <p><b>Teacher ID: </b>{value.teacher_id}</p>
+              <p><b>E-mail: </b>{value.email}</p>
+              <p><b>Birthday: </b>{value.birthday}</p>
+              <p><b>Address: </b>{value.address}</p>
             </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
           </Card.Body>
         </Card>
       ))}

@@ -63,7 +63,7 @@ const Student = () => {
                 </ListGroup>
               </Col>
               <Col sm={8}>
-                <Classworks grade={grade} />
+                <Classworks grade={grade} stdName={select}/>
 
                 {/* <Tab.Content eve>
                   <Tab.Pane>
